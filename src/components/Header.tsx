@@ -59,7 +59,7 @@ const Header = () => {
             <NavLink to="/login">Login</NavLink>
           </li>
           <li>
-            <NavLink to="/register">Sign Up</NavLink>
+            <NavLink to="/register">SignUp</NavLink>
           </li>
         </ul>
       </NavWrapper>
