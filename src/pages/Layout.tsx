@@ -31,7 +31,7 @@ const Wrapper = styled.div`
 }
 `;
 
-const Layout = () => {
+function Layout() {
   return (
     <>
       <GlobalStyle />
@@ -43,6 +43,6 @@ const Layout = () => {
       </Wrapper>
     </>
   );
-};
+}
 
 export default Layout;
