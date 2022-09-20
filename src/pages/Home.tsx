@@ -9,7 +9,6 @@ function Home() {
     <main>
       <p>
         home page display here
-        {/* using Firebase's free authentication service!{' '} */}
         {!isAuthenticated && (
           <span>
             Do you need to <Link to="/signin">sign in</Link> or <Link to="/signup">sign up</Link>?
