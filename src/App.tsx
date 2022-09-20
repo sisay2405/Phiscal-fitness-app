@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import Exercises from './pages/Exercises';
 import Home from './pages/Home';
 import Layout from './pages/Layout';
 import NotFound from './pages/NotFound';
@@ -43,9 +44,11 @@ function ProtectedRoutes({ routes }: { routes: Array<RouteConfig> }) {
 }
 
 function App() {
+  const mustBeLoggedIn = (auth: AuthenticatedUser | null) => !!auth;
+
   const routes: Array<RouteConfig> = [
-    { path: 'profile', element: <Profile />, authHandler: (user) => !!user },
-    // {path: 'exercise', element: <Exer}
+    { path: 'profile', element: <Profile />, authHandler: mustBeLoggedIn },
+    { path: 'exercises', element: <Exercises />, authHandler: mustBeLoggedIn },
   ];
   return (
     <Routes>

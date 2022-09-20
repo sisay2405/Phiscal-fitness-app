@@ -37,17 +37,20 @@ function SignIn() {
       <h2>Sign In</h2>
       {authError && <Error message={authError} />}
       <form onSubmit={handleSubmit}>
-        <label htmlFor="email">
-          Email:
-          <input
-            id="email"
-            type="email"
-            name="email"
-            value={email}
-            placeholder="user@domain.com"
-            onChange={handleInputChange}
-          />
-        </label>
+        <div className="mb-3">
+          <label htmlFor="email">
+            Email:
+            <input
+              id="email"
+              type="email"
+              name="email"
+              className="form-control"
+              value={email}
+              placeholder="Enter email address.."
+              onChange={handleInputChange}
+            />
+          </label>
+        </div>
         <label htmlFor="password">
           Password:
           <input

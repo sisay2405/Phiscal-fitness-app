@@ -8,6 +8,7 @@
     "@firebase/util": "^1.6.3",
     "@mui/icons-material": "^5.6.1",
     "@mui/material": "^5.10.4",
+    "@mui/system": "^5.10.5",
     "@reduxjs/toolkit": "^1.8.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
@@ -44,7 +45,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint:prettier": "npx prettier -w src/",
+    "lint:eslint": "npx eslint --fix src",
+    "lint": "npm run lint:prettier && npm run lint:eslint"
   },
   "eslintConfig": {
     "extends": [
