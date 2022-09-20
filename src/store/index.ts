@@ -6,12 +6,6 @@ const store = configureStore({
   reducer: {
     user: userReducer,
     exercises: exerciseReducer,
-    // extraReducer: (builder) => {
-    //   builder.addCase(fetchExercise.fulfilled, (state: Exercise[], { payload }: { payload: Exercise[] }) => {
-    //     console.log('extrReducer.fetchExercises.fired');
-    //     state = payload;
-    //   });
-    // },
   },
 });
 
