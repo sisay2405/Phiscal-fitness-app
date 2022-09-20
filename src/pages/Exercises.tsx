@@ -11,12 +11,6 @@ import { Exercise } from '../utils/type';
 import { exerciseStore } from '../utils/firebase';
 
 function Exercises() {
-  /**
-   * layout
-   * [listexercises | details | new exercise]
-   *
-   */
-
   const { exercises } = useSelector((state: RootState) => state);
   console.log({ exercises });
 
@@ -61,17 +55,12 @@ function Exercises() {
           startIcon={<AddCircleOutline />}
           onClick={() => {
             setNewExercise(true);
-            // setExercise({});
           }}
         >
           New Exercise
         </Button>
-        {/* type time date */}
-
         {showExercises(exercises)}
       </ul>
-
-      {/* component details */}
       {showExerciseDetails(exercise)}
     </Box>
   );

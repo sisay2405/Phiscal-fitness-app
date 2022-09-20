@@ -12,10 +12,6 @@ function ExerciseDetails({ exercise }: { exercise: Exercise | null }) {
     reps: [],
   };
   const workoutOptions = ['', 'pull up', 'push bar', 'squats', 'abs', 'legs'];
-
-  // const repOptions = ['', 1, 2, 3, 5, 7, 10, 12, 15, 20, 30, 45, 70, 100];
-  // const [exerciseType, setexerciseType] = useState('');
-  // const [reps, setReps] = useState(null);
   const [exerciseData, setExerciseData] = useState(() => exercise || templateExercise);
 
   useEffect(() => {
@@ -45,19 +41,12 @@ function ExerciseDetails({ exercise }: { exercise: Exercise | null }) {
   };
 
   const getOperation = (exercise: Exercise) => (!exercise?.id?.length ? 'New' : 'Update');
-
   if (!exerciseData) return <Box>No Exercise</Box>;
-  /**
-   * design box container with padding and column grid
-   */
   return (
     <Box sx={{ padding: 10 }}>
       <form className="flex-column padding " onSubmit={makeSubmitHandler}>
         <Stack spacing={5}>
           <h2>{getOperation(exerciseData)} Exercise</h2>
-
-          {/* exercise type, reps target, completed/not checkbox */}
-
           <FormControl fullWidth>
             <InputLabel id="exerciseTypeSelect">Exercise Type</InputLabel>
             <Select
@@ -70,20 +59,6 @@ function ExerciseDetails({ exercise }: { exercise: Exercise | null }) {
               {showWorkoutOptions(workoutOptions)}
             </Select>
           </FormControl>
-
-          {/* <FormControl fullWidth>
-            <InputLabel id="repsSelect">Reps</InputLabel>
-            <Select
-              label="Reps"
-              value={exerciseData.reps}
-              id="repsSelect"
-              onChange={makeChangeHandler('reps')}
-              required
-            >
-              {showWorkoutOptions(repOptions)}
-            </Select>
-          </FormControl> */}
-
           <Box>
             <Button variant="text" color="primary" type="submit">
               {getOperation(exerciseData)}
