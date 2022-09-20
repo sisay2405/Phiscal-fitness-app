@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -15,6 +15,17 @@ const GlobalStyle = createGlobalStyle`
       padding: 0.5rem 2rem;
       width: 150px;
     }
+  }
+`;
+
+export const StyledNavLogoLink = styled.div`
+  textdecoration: 'none';
+  color: '#3A1212';
+  borderbottom: '3px solid #FF2625';
+  img {
+    width: '48px';
+    height: '48px';
+    margin: '0 20px';
   }
 `;
 

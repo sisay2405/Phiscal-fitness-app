@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import Exercises from './pages/Exercises';
 import Home from './pages/Home';
@@ -29,10 +29,15 @@ function ProtectedRoutes({ routes }: { routes: Array<RouteConfig> }) {
 
   const user = useAuth();
 
-  if (authHandler && user && authHandler(user) === false) {
-    // navigate the user out
-    navigate('/unauthorized');
-  }
+  useEffect(() => {
+    console.log('check user signed in', { authorizd: authHandler(user), authHandler });
+
+    if (authHandler(user) === false) {
+      // navigate the user out
+      console.log('jumb to unauthorized');
+      navigate('/signin');
+    }
+  }, [user, navigate, authHandler]);
 
   return (
     <Routes>
@@ -44,7 +49,7 @@ function ProtectedRoutes({ routes }: { routes: Array<RouteConfig> }) {
 }
 
 function App() {
-  const mustBeLoggedIn = (auth: AuthenticatedUser | null) => !!auth;
+  const mustBeLoggedIn = (auth: AuthenticatedUser | null) => Boolean(auth?.isAuthenticated);
 
   const routes: Array<RouteConfig> = [
     { path: 'profile', element: <Profile />, authHandler: mustBeLoggedIn },
@@ -59,32 +64,6 @@ function App() {
 
         <Route path="*" element={<ProtectedRoutes routes={routes} />} />
 
-        {/* <Route path="*" element={<ProtectedRoutes />}>
-          <Route path="profile" element={<Profile />} />
-          <Route path="admin" element={<Admin />}></Route>
-          <Route path="exercise" element={<Outlet />}>
-            <Route path="new" element={<NewExercise />} />
-            <Route path="timeline" element={<ExerciseTimeline />} />
-            <Route path="*" element={<Navigate to={'/new'} />} />
-          </Route>
-        </Route> */}
-        {/* <Route
-          path="profile"
-          element={
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          }
-        /> */}
-
-        {/* <Route
-          path="admin"
-          element={
-            <ProtectedRoute adminRoute>
-              <Admin />
-            </ProtectedRoute>
-          }
-        /> */}
         <Route path="unauthorized" element={<Unauthorized />} />
         <Route path="*" element={<NotFound />} />
       </Route>
