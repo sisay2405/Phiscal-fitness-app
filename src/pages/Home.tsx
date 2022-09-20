@@ -7,9 +7,8 @@ function Home() {
 
   return (
     <main>
-      <h2>Home</h2>
       <p>
-        Welcome to a front-end-only React authentication/authorization demo
+        home page display here
         {/* using Firebase's free authentication service!{' '} */}
         {!isAuthenticated && (
           <span>

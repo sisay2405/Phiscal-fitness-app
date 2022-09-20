@@ -31,3 +31,4 @@ Add and remove exercises
 Add and remove sets
 For each set, add weight and reps
 For each set, mark as finished or unfinished
+

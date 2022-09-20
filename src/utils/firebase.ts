@@ -1,15 +1,28 @@
 import { initializeApp } from 'firebase/app';
 import {
-  User as FirebaseUser,
-  getAuth,
   createUserWithEmailAndPassword,
+  getAuth,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut as signOutUser,
-  onAuthStateChanged,
+  User as FirebaseUser,
 } from 'firebase/auth';
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
-import { setUser, clearUser, setAuthError } from '../store/userSlice';
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  getFirestore,
+  setDoc,
+  updateDoc,
+} from 'firebase/firestore';
+import { Exercise } from '@utils/type';
+import { setExercises } from 'store/exercisesSlice';
+
 import store from '../store';
+import { clearUser, setAuthError, setUser } from '../store/userSlice';
 
 type User = {
   email: string;
@@ -38,7 +51,7 @@ const dispatchError = (err: any) => {
   return store.dispatch(setAuthError(err));
 };
 
-const getUserData = async (user: FirebaseUser) => {
+const updateUser = async (user: FirebaseUser) => {
   if (user) {
     const docRef = doc(db, 'users', user.email as string);
     const docSnap = await getDoc(docRef);
@@ -84,10 +97,39 @@ const signOut = async () => {
 
 onAuthStateChanged(auth, async (user: FirebaseUser | null) => {
   if (user) {
-    await getUserData(user);
+    await updateUser(user);
   } else {
     store.dispatch(clearUser());
   }
 });
+
+export const exerciseStore = () => {
+  const fetch = () => {
+    return getDocs(collection(db, 'exercises')).then(({ docs }) => {
+      const exercises = docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      console.log({ docs, exercises });
+      return store.dispatch(setExercises(exercises));
+      // return exercises.docs as any as Exercise[];
+    });
+  };
+  const createOrUpdate = ({ id = '', ...exercise }: Exercise) => {
+    console.log({ exercise }, 'createOrUpdate.fired');
+    if (!id?.length) {
+      return addDoc(collection(db, 'exercises'), exercise).then(() => fetch());
+    }
+    const exerciseDoc = doc(db, 'exercises', id);
+    updateDoc(exerciseDoc, exercise).then(() => fetch());
+  };
+
+  const remove = ({ id = '' }: Exercise) => {
+    deleteDoc(doc(db, 'exercises', `/${id}`)).then(() => {
+      // const payload = store.getState().exercises.filter((ex) => ex.id !== exercise.id);
+      // store.dispatch(setExercises(payload));
+      fetch();
+    });
+  };
+
+  return { fetch, createOrUpdate, remove };
+};
 
 export { db, auth, signUp, signIn, signOut };
