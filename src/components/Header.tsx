@@ -1,10 +1,12 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { signOut } from '../utils/firebase';
+import useAuth from '../utils/useAuth';
 
 const HeaderWrapper = styled.header`
   align-items: center;
-  background-color: #F0A514;
+  background-color: #f0a514;
   color: #fefefe;
   display: flex;
   justify-content: space-between;
@@ -47,7 +49,15 @@ const NavWrapper = styled.nav`
   }
 `;
 
-const Header = () => {
+function Header() {
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/');
+  };
+
   return (
     <HeaderWrapper>
       <Link to="/">
@@ -55,16 +65,30 @@ const Header = () => {
       </Link>
       <NavWrapper>
         <ul>
+          {!isAuthenticated && (
+            <>
+              <li>
+                <NavLink to="/signIn">Sign In</NavLink>
+              </li>
+              <li>
+                <NavLink to="/signup">Sign Up</NavLink>
+              </li>
+            </>
+          )}
           <li>
-            <NavLink to="/login">Login</NavLink>
+            <NavLink to="/profile">Profile</NavLink>
           </li>
-          <li>
-            <NavLink to="/register">SignUp</NavLink>
-          </li>
+          {isAuthenticated && (
+            <li>
+              <button type="button" onClick={handleSignOut}>
+                Sign Out
+              </button>
+            </li>
+          )}
         </ul>
       </NavWrapper>
     </HeaderWrapper>
   );
-};
+}
 
 export default Header;
