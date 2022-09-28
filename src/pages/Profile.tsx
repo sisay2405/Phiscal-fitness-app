@@ -6,7 +6,6 @@ function Profile() {
   const { user, authError } = useAuth();
 
   if (!user) {
-    // return <Navigate to="/signin" />;
     return <Error message={authError} />;
   }
 
@@ -19,14 +18,6 @@ function Profile() {
 
         <div>{email}</div>
       </section>
-      {/* {isAuthenticated && (
-      )}
-      {!isAuthenticated && (
-        <section>
-          <h1>{localStorage.getItem('name')}</h1>
-          <h1>{localStorage.getItem('email')}</h1>
-        </section>
-      )} */}
     </main>
   );
 }

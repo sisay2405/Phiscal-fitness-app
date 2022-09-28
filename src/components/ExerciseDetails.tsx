@@ -54,7 +54,6 @@ function ExerciseDetails({ exercise }: { exercise: Exercise | null }) {
               options={workoutOptions}
               renderInput={(params) => (
                 <TextField
-                  // eslint-disable-next-line react/jsx-props-no-spreading
                   {...params}
                   value={exerciseData?.type}
                   label="Enter workout type"
