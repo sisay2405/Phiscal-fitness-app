@@ -2,24 +2,16 @@ import { initializeApp } from 'firebase/app';
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut as signOutUser,
   User as FirebaseUser,
 } from 'firebase/auth';
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  getDoc,
-  getDocs,
-  getFirestore,
-  setDoc,
-  updateDoc,
-} from 'firebase/firestore';
-import { Exercise } from '@utils/type';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
 import { setExercises } from 'store/exercisesSlice';
+import { Exercise } from './type';
 
 import store from '../store';
 import { clearUser, setAuthError, setUser } from '../store/userSlice';
@@ -46,7 +38,57 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 
+// export const googleSignIn = () => {
+//   const googleAuthProvider = new GoogleAuthProvider();
+
+// signInWithPopup(auth, googleAuthProvider)
+//   .then((result) => {
+//     // This gives you a Google Access Token. You can use it to access the Google API.
+//     const credential = GoogleAuthProvider.credentialFromResult(result);
+//     console.log(credential)
+//     // const token = credential.accessToken;
+//     // The signed-in user info.
+//     // const user = result.user;
+//     // ...
+//   }).catch((error) => {
+//     console.log(error)
+//     // Handle Errors here.
+//     // const errorCode = error.code;
+//     // const errorMessage = error.message;
+//     // The email of the user's account used.
+//     // const email = error.customData.email;
+//     // The AuthCredential type that was used.
+//     // const credential = GoogleAuthProvider.credentialFromError(error);
+//     // ...
+//   });
+//   return signInWithPopup(auth, googleAuthProvider);
+
+// }
+
+export const signInWithGoogle = () => {
+  signInWithPopup(auth, provider)
+    .then(async (result) => {
+      if (!result) return;
+
+      // The signed-in user info.
+
+      // localStorage.setItem('name', JSON.stringify(name));
+      // localStorage.setItem('email', JSON.stringify(email));
+
+      const plainUserEntries = Object.entries(result.user).filter(([, value]) => typeof value !== 'object');
+      const plainUser = Object.fromEntries(plainUserEntries);
+
+      localStorage.setItem('token', await result.user.getIdToken());
+      localStorage.setItem('user', JSON.stringify(plainUser));
+
+      store.dispatch(setUser(result.user));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 const dispatchError = (err: any) => {
   return store.dispatch(setAuthError(err));
 };
@@ -57,8 +99,9 @@ const updateUser = async (user: FirebaseUser) => {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      const userDoc = docSnap.data();
-      return store.dispatch(setUser({ ...userDoc, isAuthenticated: true }));
+      // const userDoc = docSnap.data();
+      // return store.dispatch(setUser({ ...userDoc ));
+      return store.dispatch(setUser(user));
     }
   }
 
@@ -87,17 +130,44 @@ const signIn = async ({ email, password }: User) => {
   }
 };
 
+export const googleSignin = () => {
+  const auth = getAuth();
+  const provider = new GoogleAuthProvider();
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      if (!credential) {
+        throw new Error('Error: invalid credentials');
+      }
+      // const token = credential.accessToken;
+      // The signed-in user info.
+      const { user } = result;
+      updateUser(user);
+      // ...
+    })
+    .catch((error) => {
+      // Handle Errors here.
+
+      console.log(error);
+
+      // ...
+    });
+};
+
 const signOut = async () => {
   try {
     await signOutUser(auth);
+    localStorage.removeItem('token');
   } catch ({ message }) {
     dispatchError(message);
   }
 };
 
-onAuthStateChanged(auth, async (user: FirebaseUser | null) => {
+onAuthStateChanged(auth, async (user) => {
   if (user) {
     await updateUser(user);
+    store.dispatch(setUser(user));
   } else {
     store.dispatch(clearUser());
   }
@@ -109,7 +179,6 @@ export const exerciseStore = () => {
       const exercises = docs.map((doc) => ({ ...doc.data(), id: doc.id }));
       console.log({ docs, exercises });
       return store.dispatch(setExercises(exercises));
-      // return exercises.docs as any as Exercise[];
     });
   };
   const createOrUpdate = ({ id = '', ...exercise }: Exercise) => {
@@ -123,8 +192,6 @@ export const exerciseStore = () => {
 
   const remove = ({ id = '' }: Exercise) => {
     deleteDoc(doc(db, 'exercises', `/${id}`)).then(() => {
-      // const payload = store.getState().exercises.filter((ex) => ex.id !== exercise.id);
-      // store.dispatch(setExercises(payload));
       fetch();
     });
   };

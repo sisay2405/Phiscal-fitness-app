@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React from 'react';
 import { RemoveCircleOutlined } from '@mui/icons-material';
 import Button from '@mui/material/Button';
@@ -8,7 +7,7 @@ import { Exercise } from '../utils/type';
 
 function ExerciseSummary({ exercise }: { exercise: Exercise }) {
   return (
-    <Grid container>
+    <Grid container sx={{ rowGap: 3 }}>
       <Grid item xs={6}>
         <strong>{exercise.type}</strong>
       </Grid>
