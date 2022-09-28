@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
     "paths": {
-      "@utils/*": ["utils/*"],
-      "@components/*": ["components/*"]
+      
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],

@@ -1,15 +1,16 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import useAuth from '../utils/useAuth';
+import useAuth from '../utils/useAuths';
 
 function Home() {
-  const { isAuthenticated } = useAuth();
+  const { user } = useAuth();
 
   return (
     <main>
       <p>
         home page display here
-        {!isAuthenticated && (
+        {!user && (
           <span>
             Do you need to <Link to="/signin">sign in</Link> or <Link to="/signup">sign up</Link>?
           </span>

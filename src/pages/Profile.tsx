@@ -1,20 +1,32 @@
+import Error from 'components/Error';
 import React from 'react';
-import useAuth from '../utils/useAuth';
+import useAuth from '../utils/useAuths';
 
 function Profile() {
-  const userData = useAuth();
+  const { user, authError } = useAuth();
+
+  if (!user) {
+    // return <Navigate to="/signin" />;
+    return <Error message={authError} />;
+  }
+
+  const { email, displayName } = user;
 
   return (
     <main>
-      <h2>Profile</h2>
-      <p>This page is accessible by authenticated users; admin access is not required.</p>
       <section>
-        <strong>Authenticated user data:</strong>
-        <code>
-          <pre>{JSON.stringify(userData, null, 2)}</pre>
-        </code>
+        <div>{displayName}</div>
+
+        <div>{email}</div>
       </section>
-      <p>empty</p>
+      {/* {isAuthenticated && (
+      )}
+      {!isAuthenticated && (
+        <section>
+          <h1>{localStorage.getItem('name')}</h1>
+          <h1>{localStorage.getItem('email')}</h1>
+        </section>
+      )} */}
     </main>
   );
 }

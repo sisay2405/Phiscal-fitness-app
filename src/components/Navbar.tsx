@@ -1,32 +1,110 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Stack } from '@mui/material';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import useAuth from 'utils/useAuths';
+import { Stack } from '@mui/system';
+import { signOut } from '../utils/firebase';
 
-import Logo from '../assets/images/Logo.png';
-import { StyledNavLogoLink } from '../utils/globalStyle';
+const StyleHeaderWrapper = styled.header`
+  align-items: center;
+  background-color: #f0a514;
+  color: #fefefe;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  & > a {
+    color: #fefefe;
+    text-decoration: none;
+  }
+  h1 {
+    margin: 1rem 0;
+  }
+  span {
+    padding: 0 1rem;
+  }
+`;
+
+const StyleNavWrapper = styled.nav`
+  ul {
+    display: flex;
+    list-style-type: none;
+  }
+  li {
+    padding-left: 1.5rem;
+    &:first-child {
+      padding-left: 0;
+    }
+  }
+  a {
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-decoration: none;
+    &:hover {
+      color: lightgrey;
+    }
+    &.active {
+      color: black;
+      font-style: italic;
+    }
+  }
+  .logoutbutton {
+    color: red;
+  }
+`;
 
 function Navbar() {
+  const navigate = useNavigate();
+  const { user } = useAuth();
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/');
+  };
+
   return (
-    <Stack
-      direction="row"
-      justifyContent="space-around"
-      sx={{ gap: { sm: '122px', xs: '40px' }, marginTop: { sm: '32px', xs: '20px' }, justifyContent: 'none' }}
-      px="20px"
-    >
-      <StyledNavLogoLink>
-        <Link to="/">
-          <img src={Logo} alt="Logo" />
-        </Link>
-      </StyledNavLogoLink>
-      <Stack direction="row" gap="40px" fontSize="24px" alignItems="flex-end">
-        <StyledNavLogoLink>
-          <Link to="/">Home</Link>
-        </StyledNavLogoLink>
-        <StyledNavLogoLink>
-          <Link to="/exercises">Exercises</Link>
-        </StyledNavLogoLink>
-      </Stack>
-    </Stack>
+    <StyleHeaderWrapper>
+      <Link to="/">
+        <Stack direction="row" sx={{ marginRight: 'cacl( 8 *4px )' }}>
+          <h1>Phisical Exercise</h1>
+        </Stack>
+      </Link>
+
+      <StyleNavWrapper>
+        <ul>
+          {!user && (
+            <>
+              <li>
+                <NavLink to="/signIn">Sign In</NavLink>
+              </li>
+              <li>
+                <NavLink to="/signup">Sign Up</NavLink>
+              </li>
+            </>
+          )}
+          {user && (
+            <>
+              <li>
+                <NavLink to="/">Home</NavLink>
+              </li>
+              <li>
+                <NavLink to="/exercises">Exercises</NavLink>
+              </li>
+              <li>
+                <NavLink to="/profile">{user.displayName}</NavLink>
+              </li>
+              <li>
+                <div className="logoutbutton">
+                  <button type="button" onClick={handleSignOut}>
+                    Sign Out
+                  </button>
+                </div>
+              </li>
+            </>
+          )}
+        </ul>
+      </StyleNavWrapper>
+    </StyleHeaderWrapper>
   );
 }
 

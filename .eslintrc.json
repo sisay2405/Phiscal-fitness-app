@@ -19,8 +19,13 @@
   },
   "plugins": ["react", "react-hooks", "prettier"],
   "rules": {
-    "prettier/prettier": "error",
-    "max-len": ["error", { "code": 120 }],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+    "max-len": ["error", { "code": 130 }],
     "camelcase": "off",
     "no-undef": "off",
     "no-unused-vars": "warn",
