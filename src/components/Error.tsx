@@ -6,7 +6,7 @@ const StyledError = styled.p`
   font-weight: 700;
 `;
 
-function Error({ message = 'An error occurred.' }: { message: string }) {
+function Error({ message = 'An error occurred.' }: { message: string | null }) {
   let customMessage;
 
   switch (message) {

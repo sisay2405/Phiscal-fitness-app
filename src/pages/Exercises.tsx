@@ -1,5 +1,5 @@
 import { AddCircleOutline } from '@mui/icons-material';
-import { Divider } from '@mui/material';
+import { Divider, Grid } from '@mui/material';
 import Button from '@mui/material/Button';
 import { Box, Stack } from '@mui/system';
 import React, { useEffect, useState } from 'react';
@@ -12,13 +12,10 @@ import { exerciseStore } from '../utils/firebase';
 
 function Exercises() {
   const { exercises } = useSelector((state: RootState) => state);
-  console.log({ exercises });
-
-  const [newExercise, setNewExercise] = useState(false);
+  // const [newExercise, setNewExercise] = useState(false);
   const [exercise, setExercise] = useState<Exercise | null>(null);
 
   useEffect(() => {
-    console.log('Exercises.useEfect.mount');
     exerciseStore().fetch();
   }, []);
 
@@ -30,7 +27,7 @@ function Exercises() {
     return (
       <Stack direction="column" gap={3} divider={<Divider orientation="horizontal" flexItem />}>
         {exercises.map((exercise) => (
-          <Box onClick={() => setExercise(exercise)}>
+          <Box onClick={() => setExercise(exercise)} key={exercise.id}>
             <ExerciseSummary exercise={exercise} />
           </Box>
         ))}
@@ -40,27 +37,38 @@ function Exercises() {
   };
 
   const showExerciseDetails = (exercise: Exercise | null) => {
-    console.log({ exercise, newExercise });
-    if (exercise || newExercise) return <ExerciseDetails exercise={exercise} />;
-    return <Box>No exercise selected</Box>;
+    if (!exercise) {
+      return (
+        <Grid container sx={{ 'justify-content': 'center' }}>
+          <Grid item xs={4} sx={{ margin: 'auto', fontSize: 'h6.fontSize' }}>
+            No exercise selected
+          </Grid>
+        </Grid>
+      );
+    }
+
+    return <ExerciseDetails exercise={exercise} />;
   };
 
   return (
-    <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 4fr ' }}>
+    <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 4fr ', gap: '4' }}>
       <ul>
         <h2>List of exercises/History/</h2>
+
         <Button
           variant="text"
           color="primary"
           startIcon={<AddCircleOutline />}
           onClick={() => {
-            setNewExercise(true);
+            // setNewExercise(true);
+            setExercise({} as any as Exercise);
           }}
         >
           New Exercise
         </Button>
         {showExercises(exercises)}
       </ul>
+
       {showExerciseDetails(exercise)}
     </Box>
   );
