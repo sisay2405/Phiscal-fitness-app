@@ -1,32 +1,29 @@
-import { Box, Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Stack } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import { Exercise } from '../utils/type';
+import { Autocomplete, Box, Button, FormControl, Stack, TextField } from '@mui/material';
+import React, { useEffect, useMemo, useState } from 'react';
 import { exerciseStore } from '../utils/firebase';
+import { Exercise } from '../utils/type';
 
 function ExerciseDetails({ exercise }: { exercise: Exercise | null }) {
-  const templateExercise: Exercise = {
-    type: '',
-    endTime: '',
-    startTime: '',
-    id: null,
-    reps: [],
-  };
+  const templateExercise: Exercise = useMemo(
+    () => ({
+      type: '',
+      endTime: '',
+      startTime: '',
+      id: null,
+      reps: [],
+    }),
+    [],
+  );
+
   const workoutOptions = ['', 'pull up', 'push bar', 'squats', 'abs', 'legs'];
   const [exerciseData, setExerciseData] = useState(() => exercise || templateExercise);
 
   useEffect(() => {
-    setExerciseData((prevEx) => exercise || prevEx);
-  }, [exercise]);
+    setExerciseData(exercise || templateExercise);
+  }, [exercise, templateExercise]);
 
-  const showWorkoutOptions = (workoutOptions: Array<number | string>) =>
-    workoutOptions.map((workout) => (
-      <MenuItem value={workout} key={workout}>
-        {workout}
-      </MenuItem>
-    ));
-
-  const makeChangeHandler = (event: SelectChangeEvent) => {
-    setExerciseData({ ...exerciseData, type: `${event.target.value}` });
+  const setExerciseField = (key: keyof Exercise, value: any) => {
+    setExerciseData((oldExercise) => ({ ...oldExercise, [key]: value }));
   };
 
   const handleUpdateorCreate = (exercise: Exercise) => {
@@ -46,18 +43,28 @@ function ExerciseDetails({ exercise }: { exercise: Exercise | null }) {
     <Box sx={{ padding: 10 }}>
       <form className="flex-column padding " onSubmit={makeSubmitHandler}>
         <Stack spacing={5}>
-          <h2>{getOperation(exerciseData)} Exercise</h2>
+          <h2>
+            {getOperation(exerciseData)} Exercise {exerciseData.type}
+          </h2>
           <FormControl fullWidth>
-            <InputLabel id="exerciseTypeSelect">Exercise Type</InputLabel>
-            <Select
-              id="exerciseTypeSelect"
-              label="Exercise type"
-              value={exerciseData.type}
-              onChange={makeChangeHandler}
-              required
-            >
-              {showWorkoutOptions(workoutOptions)}
-            </Select>
+            <Autocomplete
+              freeSolo
+              id="exerciseTypeInput"
+              disableClearable
+              options={workoutOptions}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  value={exerciseData?.type}
+                  label="Enter workout type"
+                  onChange={({ target }) => setExerciseField('type', target.value)}
+                  InputProps={{
+                    ...params.InputProps,
+                    type: 'search',
+                  }}
+                />
+              )}
+            />
           </FormControl>
           <Box>
             <Button variant="text" color="primary" type="submit">
