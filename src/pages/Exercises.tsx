@@ -27,8 +27,8 @@ function Exercises() {
     return (
       <Stack direction="column" gap={3} divider={<Divider orientation="horizontal" flexItem />}>
         {exercises.map((exercise) => (
-          <Box onClick={() => setExercise(exercise)} key={exercise.id}>
-            <ExerciseSummary exercise={exercise} />
+          <Box key={exercise.id}>
+            <ExerciseSummary onClick={() => setExercise(exercise)} exercise={exercise} />
           </Box>
         ))}
         ;

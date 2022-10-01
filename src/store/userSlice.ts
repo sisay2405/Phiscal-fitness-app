@@ -10,6 +10,7 @@ import { User } from 'firebase/auth';
 // } ;
 
 const initialState = {
+  value: {},
   user: null as User | null,
   authError: null as null | string,
 };
@@ -26,6 +27,7 @@ export const userSlice = createSlice({
     },
     clearUser(state) {
       state.authError = null;
+      state.user = null;
     },
 
     setAuthError(state, { payload }: { payload: string }) {

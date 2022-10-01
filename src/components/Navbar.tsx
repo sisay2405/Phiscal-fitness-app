@@ -59,9 +59,10 @@ function Navbar() {
 
   const handleSignOut = async () => {
     await signOut();
+    console.log('logout working');
+    // !user
     navigate('/');
   };
-
   return (
     <StyleHeaderWrapper>
       <Link to="/">
