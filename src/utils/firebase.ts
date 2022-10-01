@@ -39,44 +39,10 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
-
-// export const googleSignIn = () => {
-//   const googleAuthProvider = new GoogleAuthProvider();
-
-// signInWithPopup(auth, googleAuthProvider)
-//   .then((result) => {
-//     // This gives you a Google Access Token. You can use it to access the Google API.
-//     const credential = GoogleAuthProvider.credentialFromResult(result);
-//     console.log(credential)
-//     // const token = credential.accessToken;
-//     // The signed-in user info.
-//     // const user = result.user;
-//     // ...
-//   }).catch((error) => {
-//     console.log(error)
-//     // Handle Errors here.
-//     // const errorCode = error.code;
-//     // const errorMessage = error.message;
-//     // The email of the user's account used.
-//     // const email = error.customData.email;
-//     // The AuthCredential type that was used.
-//     // const credential = GoogleAuthProvider.credentialFromError(error);
-//     // ...
-//   });
-//   return signInWithPopup(auth, googleAuthProvider);
-
-// }
-
 export const signInWithGoogle = () => {
   signInWithPopup(auth, provider)
     .then(async (result) => {
       if (!result) return;
-
-      // The signed-in user info.
-
-      // localStorage.setItem('name', JSON.stringify(name));
-      // localStorage.setItem('email', JSON.stringify(email));
-
       const plainUserEntries = Object.entries(result.user).filter(([, value]) => typeof value !== 'object');
       const plainUser = Object.fromEntries(plainUserEntries);
 
@@ -99,8 +65,6 @@ const updateUser = async (user: FirebaseUser) => {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      // const userDoc = docSnap.data();
-      // return store.dispatch(setUser({ ...userDoc ));
       return store.dispatch(setUser(user));
     }
   }
@@ -130,35 +94,28 @@ const signIn = async ({ email, password }: User) => {
   }
 };
 
-export const googleSignin = () => {
-  const auth = getAuth();
-  const provider = new GoogleAuthProvider();
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      if (!credential) {
-        throw new Error('Error: invalid credentials');
-      }
-      // const token = credential.accessToken;
-      // The signed-in user info.
-      const { user } = result;
-      updateUser(user);
-      // ...
-    })
-    .catch((error) => {
-      // Handle Errors here.
-
-      console.log(error);
-
-      // ...
-    });
-};
+// export const googleSignin = () => {
+//   const auth = getAuth();
+//   const provider = new GoogleAuthProvider();
+//   signInWithPopup(auth, provider)
+//     .then((result) => {
+//       const credential = GoogleAuthProvider.credentialFromResult(result);
+//       if (!credential) {
+//         throw new Error('Error: invalid credentials');
+//       }
+//       const { user } = result;
+//       updateUser(user);
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// };
 
 const signOut = async () => {
   try {
     await signOutUser(auth);
     localStorage.removeItem('token');
+    store.dispatch(clearUser());
   } catch ({ message }) {
     dispatchError(message);
   }

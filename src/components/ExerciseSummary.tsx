@@ -5,19 +5,24 @@ import Grid from '@mui/material/Grid';
 import { exerciseStore } from '../utils/firebase';
 import { Exercise } from '../utils/type';
 
-function ExerciseSummary({ exercise }: { exercise: Exercise }) {
+function ExerciseSummary({ exercise, onClick }: { exercise: Exercise; onClick: () => void }) {
+  const date = !exercise?.startTime ? '' : new Date(exercise?.startTime).toLocaleDateString();
+
   return (
     <Grid container sx={{ rowGap: 3 }}>
       <Grid item xs={6}>
         <strong>{exercise.type}</strong>
       </Grid>
       <Grid item xs={6}>
-        Duration
+        Duration {`${exercise?.duration?.value} ${exercise?.duration?.timeUnit}`}
       </Grid>
       <Grid item xs={12}>
-        Date
+        Date {date}
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} display="flex" columnGap={1}>
+        <Button variant="outlined" color="primary" onClick={onClick}>
+          Details
+        </Button>
         <Button
           variant="contained"
           color="warning"
