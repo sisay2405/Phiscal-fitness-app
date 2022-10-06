@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable react/no-string-refs */
 import { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 import React, { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -25,7 +27,6 @@ const FormWrapper = styled.form`
     margin-left: 0;
     margin: 2rem 0;
     padding: 0.5rem 1rem;
-    // width: 100%;
   }
   form {
     border: 2px solid skyblue;
@@ -82,7 +83,6 @@ function SignIn() {
   const handleGoogleSignIn = async () => {
     try {
       signInWithGoogle();
-      // setFormData(formDefaults);
     } catch (error) {
       console.log(error);
     }
@@ -111,14 +111,7 @@ function SignIn() {
         </div>
         <label htmlFor="password">
           Password:
-          <input
-            id="password"
-            type="password"
-            name="password"
-            value={password}
-            placeholder="S3cr3tPW!"
-            onChange={handleInputChange}
-          />
+          <input id="password" type="password" name="password" value={password} placeholder="S3cr3tPW!" onChange={handleInputChange} />
         </label>
         <button type="submit">Submit</button>
         <div>

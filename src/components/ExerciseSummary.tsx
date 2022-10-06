@@ -5,8 +5,10 @@ import Grid from '@mui/material/Grid';
 import { exerciseStore } from '../utils/firebase';
 import { Exercise } from '../utils/type';
 
+const days = ['sun', 'mon', 'tues', 'wed', 'thurs', 'fri', 'sat'];
+
 function ExerciseSummary({ exercise, onClick }: { exercise: Exercise; onClick: () => void }) {
-  const date = !exercise?.startTime ? '' : new Date(exercise?.startTime).toLocaleDateString();
+  const exerciseDate = new Date(exercise.startTime);
 
   return (
     <Grid container sx={{ rowGap: 3 }}>
@@ -17,18 +19,13 @@ function ExerciseSummary({ exercise, onClick }: { exercise: Exercise; onClick: (
         Duration {`${exercise?.duration?.value} ${exercise?.duration?.timeUnit}`}
       </Grid>
       <Grid item xs={12}>
-        Date {date}
+        Date {exerciseDate.toLocaleString()} {days[exerciseDate.getDay()]}
       </Grid>
       <Grid item xs={12} display="flex" columnGap={1}>
         <Button variant="outlined" color="primary" onClick={onClick}>
           Details
         </Button>
-        <Button
-          variant="contained"
-          color="warning"
-          startIcon={<RemoveCircleOutlined />}
-          onClick={() => exerciseStore().remove(exercise)}
-        >
+        <Button variant="contained" color="warning" startIcon={<RemoveCircleOutlined />} onClick={() => exerciseStore().remove(exercise)}>
           Delete
         </Button>
       </Grid>

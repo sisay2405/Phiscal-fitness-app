@@ -20,14 +20,7 @@ const Wrapper = styled.div`
     a:visited {
       color: blue;
     }
-    h2 {
-      color: #009900;
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 2rem;
-    }
   }
-}
 `;
 
 function Layout() {

@@ -94,23 +94,6 @@ const signIn = async ({ email, password }: User) => {
   }
 };
 
-// export const googleSignin = () => {
-//   const auth = getAuth();
-//   const provider = new GoogleAuthProvider();
-//   signInWithPopup(auth, provider)
-//     .then((result) => {
-//       const credential = GoogleAuthProvider.credentialFromResult(result);
-//       if (!credential) {
-//         throw new Error('Error: invalid credentials');
-//       }
-//       const { user } = result;
-//       updateUser(user);
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//     });
-// };
-
 const signOut = async () => {
   try {
     await signOutUser(auth);

@@ -10,8 +10,8 @@ export type TimeUnit = 'seconds' | 'minutes';
 export interface Exercise {
   id?: string | null;
   type: string;
-  startTime: number;
-  endTime?: number | null;
+  startTime: string;
+  endTime: string;
   reps: Rep[];
   duration: {
     value: number;

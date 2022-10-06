@@ -21,11 +21,7 @@ const GlobalStyle = createGlobalStyle`
       border-radius:10px;
     }
   }
-  .g-btn {
-    height: 40px !important;
-    line-height: 40px !important;
-    font-size: 15px !important;
-  }
+  
   .login-with-google-btn {
     transition: background-color 0.3s, box-shadow 0.3s;
     padding: 12px 16px 12px 42px;

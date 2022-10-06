@@ -1,4 +1,4 @@
-import { Button, Stack } from '@mui/material';
+import { Button, FormControl, FormLabel, Stack } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { Box } from '@mui/system';
 import Error from 'components/Error';
@@ -8,15 +8,24 @@ import useAuth from '../utils/useAuths';
 
 const ProfileWrapper = styled.footer`
   margin-top: 100px;
-  width: 420px;
+  width: 600px;
   overflow: hidden;
   text-align: center;
   position: relative;
   box-shadow: 0 0 10px #00000070;
+  h2 {
+    color: #f0a514;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
 `;
 
 function Profile(): React.ReactElement {
   const { user, authError } = useAuth();
+  // const userprofile = useState({
+  //   displayName: 'na',
+  // });
 
   if (!user) {
     return <Error message={authError} />;
@@ -25,44 +34,39 @@ function Profile(): React.ReactElement {
   const { email, displayName } = user;
 
   return (
-    <main>
-      <ProfileWrapper className="profilePage">
-        <h3>Name: {displayName}</h3>
-        <h3>E Mail: {email}</h3>
+    <main className="profilemain">
+      <ProfileWrapper>
+        <Box id="topSection">
+          <Grid container spacing={0}>
+            <Grid item direction="column">
+              <Box sx={{ borderRadius: '50%' }}>
+                <img src="https://th.bing.com/th/id/R.e6717254470eaf137158f3be5c96c83e?rik=8m6MRRgeuqO5rQ&pid=ImgRaw&r=0" alt="" width="90px" />
+              </Box>
+
+              <Button variant="text" color="primary">
+                change
+              </Button>
+            </Grid>
+          </Grid>
+        </Box>
+        <Stack direction="column">
+          <h2>Name: {displayName}</h2>
+          <h2>E Mail: {email}</h2>
+        </Stack>
       </ProfileWrapper>
 
-      <Box id="topSection">
-        <Grid container spacing={0}>
-          <Grid item flexGrow="initial">
-            <Box sx={{ borderRadius: '50%' }}>
-              <img
-                src="https://th.bing.com/th/id/R.e6717254470eaf137158f3be5c96c83e?rik=8m6MRRgeuqO5rQ&pid=ImgRaw&r=0"
-                alt=""
-                width="90px"
-              />
-            </Box>
-          </Grid>
-          <Grid item>
-            <Stack direction="column">
-              <h2>Prrofile</h2>
-              <span>Update your photo and personal details</span>
-            </Stack>
-          </Grid>
-          <Grid item>
-            <Stack direction="row">
-              <Button variant="outlined" color="primary">
-                Cancel
-              </Button>
-              <Button variant="contained" color="primary">
-                Save
-              </Button>
-            </Stack>
-          </Grid>
-        </Grid>
-      </Box>
+      {/* profile form  */}
+      <Box>
+        {' '}
+        {/* displayname */}
+        <FormControl>
+          <FormLabel>DisplayName</FormLabel>
 
-      <Box id="detailSection">
-        <h2>Profile Details</h2>
+          {/* <TextField id="displayname" label="Display name" value={userprofile.displayName} /> */}
+        </FormControl>
+        {/* age */}
+        {/* weight */}
+        {/* goal */}
       </Box>
     </main>
   );

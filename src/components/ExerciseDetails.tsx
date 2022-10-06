@@ -1,35 +1,47 @@
 import { AddCircleOutlineRounded } from '@mui/icons-material';
-import { Autocomplete, Box, Button, FormControl, Stack, TextField, IconButton } from '@mui/material';
-import React, { useEffect, useMemo, useState } from 'react';
+import { Autocomplete, Box, Button, FormControl, IconButton, Stack, TextField } from '@mui/material';
+import React, { useCallback, useEffect, useState } from 'react';
+import useAuth from 'utils/useAuths';
 import { exerciseStore } from '../utils/firebase';
 import { Exercise } from '../utils/type';
 import useTimer from './useTimer';
 
-function ExerciseDetails({ exercise }: { exercise: Exercise | null }) {
-  const templateExercise: Exercise = useMemo(
-    () => ({
+function ExerciseDetails({ exercise }: { exercise: Exercise }) {
+  const setOrReps = [1, 3, 5, 7, 9];
+
+  const { user } = useAuth();
+
+  const makeNewExercise = useCallback((uid: string = '') => {
+    const result = {
       type: '',
-      endTime: null,
-      startTime: Date.now(),
-      id: null,
+      endTime: '',
+      startTime: new Date().toISOString(),
+      id: uid,
       reps: [],
       duration: null,
-    }),
-    [],
-  );
+    };
 
-  const setOrReps = [1, 3, 5, 7, 9];
+    console.log('calling makeNewExercise', result);
+    return result;
+  }, []);
+
+  const isValidExercise = useCallback(
+    (exercise: Exercise | {} | null) => exercise && Object.keys(makeNewExercise()).every((key) => key in exercise),
+    [makeNewExercise],
+  );
 
   const workoutOptions = ['', 'pull up', 'push bar', 'squats', 'abs', 'legs'];
   const [reps, setReps] = useState(0);
-  const [exerciseData, setExerciseData] = useState<Exercise>(templateExercise);
+  const [exerciseData, setExerciseData] = useState<Exercise>(() => (isValidExercise(exercise) ? exercise : makeNewExercise(user?.uid)));
   const timer = useTimer();
 
   useEffect(() => {
-    if (exercise) {
+    if (isValidExercise(exercise)) {
       setExerciseData(exercise);
+    } else if (!isValidExercise(exercise)) {
+      setExerciseData(makeNewExercise());
     }
-  }, [exercise]);
+  }, [exercise, isValidExercise, makeNewExercise]);
 
   const setExerciseField = (key: keyof Exercise, value: any) => {
     setExerciseData({ ...exerciseData, [key]: value });
@@ -42,6 +54,8 @@ function ExerciseDetails({ exercise }: { exercise: Exercise | null }) {
     exerciseStore().createOrUpdate(data);
   };
 
+  const resetExercise = () => setExerciseData(makeNewExercise());
+
   const makeSubmitHandler = (event: React.FormEvent) => {
     event.preventDefault();
     console.log('formSubmit.fired');
@@ -50,7 +64,9 @@ function ExerciseDetails({ exercise }: { exercise: Exercise | null }) {
   };
 
   const getOperation = (exercise: Exercise) => (!exercise?.id?.length ? 'New' : 'Update');
+
   if (!exerciseData) return <Box>No Exercise</Box>;
+
   return (
     <Box sx={{ padding: 10 }}>
       <form className="flex-column padding " onSubmit={makeSubmitHandler}>
@@ -65,13 +81,13 @@ function ExerciseDetails({ exercise }: { exercise: Exercise | null }) {
               disableClearable
               options={workoutOptions}
               selectOnFocus
-              value={exerciseData?.type}
+              value={exerciseData?.type ?? ''}
               onChange={(event, newValue) => setExerciseField('type', newValue)}
               renderInput={(params) => (
                 <TextField
                   {...params}
                   value={exerciseData?.type}
-                  label="Enter workout type"
+                  label="Type workout here"
                   onChange={(event) => setExerciseField('type', event.target.value)}
                 />
               )}
@@ -94,6 +110,8 @@ function ExerciseDetails({ exercise }: { exercise: Exercise | null }) {
             <TextField
               id="elapsedTime"
               label={`Elapsed time ${timer.isRunning ? 'running' : 'stopped'}`}
+              inputProps={{ style: { fontSize: 25 } }}
+              InputLabelProps={{ style: { fontSize: 30 } }}
               value={`${timer.elapsedTime.value} ${timer.elapsedTime.timeUnit}`}
               color="primary"
               disabled
@@ -105,34 +123,37 @@ function ExerciseDetails({ exercise }: { exercise: Exercise | null }) {
               disableClearable
               options={setOrReps}
               selectOnFocus
-              value={exerciseData?.type}
+              value={exerciseData.type}
               sx={{ width: '150px' }}
               onChange={(event, newValue) => {
                 if (!Number.isNaN(newValue)) setReps(Number(newValue));
               }}
               renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Enter reps"
-                  type="number"
-                  onChange={(event) => event.target.value && setReps(parseInt(event.target.value, 10))}
-                />
+                <TextField {...params} label="Enter reps" type="number" onChange={(event) => event.target.value && setReps(parseInt(event.target.value, 10))} />
               )}
             />
 
             <IconButton
               aria-label="add a rep to workout"
-              onClick={() => setExerciseField('reps', [...(exerciseData.reps || []), reps])}
+              onClick={() => setExerciseField('reps', [...(exerciseData.reps || []), { number: reps, startTime: new Date().toISOString() }])}
             >
+              <div>Add reps</div>
               <AddCircleOutlineRounded />
             </IconButton>
-
+            {/* <div>Date</div> */}
             <TextField
               id="startTime"
-              label="Start Time"
-              disabled
-              value={!exerciseData?.startTime ? 'no date' : new Date(exerciseData.startTime).toISOString()}
+              // label="Start Time"
+              type="datetime-local"
+              onChange={(event) => {
+                const currentDateTime = new Date(event.target.value);
+                console.table({ utc: currentDateTime.toUTCString(), iso: currentDateTime.toISOString() });
+              }}
             />
+
+            <Button variant="outlined" color="primary" onClick={resetExercise}>
+              reset
+            </Button>
           </Box>
 
           {/* reps */}
@@ -140,8 +161,10 @@ function ExerciseDetails({ exercise }: { exercise: Exercise | null }) {
           <Box>
             <ol>
               <Stack direction="column" rowGap={1}>
-                {exerciseData?.reps?.map((_rep) => (
-                  <li key={`${_rep}`}>{`${_rep} rep(s)`}</li>
+                {exerciseData.reps.map((_rep) => (
+                  <li key={_rep?.startTime ?? new Date().toISOString()}>
+                    {new Date(_rep.startTime).toLocaleDateString()} {_rep.number}
+                  </li>
                 ))}
               </Stack>
             </ol>

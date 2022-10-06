@@ -95,6 +95,9 @@ function Navbar() {
                 <NavLink to="/profile">{user.displayName}</NavLink>
               </li>
               <li>
+                <NavLink to="/previousWork">Previous Exercise</NavLink>
+              </li>
+              <li>
                 <div className="logoutbutton">
                   <button type="button" onClick={handleSignOut}>
                     Sign Out

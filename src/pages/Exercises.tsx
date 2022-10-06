@@ -12,7 +12,6 @@ import { exerciseStore } from '../utils/firebase';
 
 function Exercises() {
   const { exercises } = useSelector((state: RootState) => state);
-  // const [newExercise, setNewExercise] = useState(false);
   const [exercise, setExercise] = useState<Exercise | null>(null);
 
   useEffect(() => {
@@ -46,21 +45,18 @@ function Exercises() {
         </Grid>
       );
     }
-
     return <ExerciseDetails exercise={exercise} />;
   };
 
   return (
     <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 4fr ', gap: '4' }}>
       <ul>
-        <h2>List of exercises/History/</h2>
-
+        <h2>List of Exercises</h2>
         <Button
           variant="text"
           color="primary"
           startIcon={<AddCircleOutline />}
           onClick={() => {
-            // setNewExercise(true);
             setExercise({} as any as Exercise);
           }}
         >
@@ -68,7 +64,6 @@ function Exercises() {
         </Button>
         {showExercises(exercises)}
       </ul>
-
       {showExerciseDetails(exercise)}
     </Box>
   );
