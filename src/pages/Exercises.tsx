@@ -12,7 +12,6 @@ import { exerciseStore } from '../utils/firebase';
 
 function Exercises() {
   const { exercises } = useSelector((state: RootState) => state);
-  // const [newExercise, setNewExercise] = useState(false);
   const [exercise, setExercise] = useState<Exercise | null>(null);
 
   useEffect(() => {
@@ -27,8 +26,8 @@ function Exercises() {
     return (
       <Stack direction="column" gap={3} divider={<Divider orientation="horizontal" flexItem />}>
         {exercises.map((exercise) => (
-          <Box onClick={() => setExercise(exercise)} key={exercise.id}>
-            <ExerciseSummary exercise={exercise} />
+          <Box key={exercise.id}>
+            <ExerciseSummary onClick={() => setExercise(exercise)} exercise={exercise} />
           </Box>
         ))}
         ;
@@ -40,27 +39,24 @@ function Exercises() {
     if (!exercise) {
       return (
         <Grid container sx={{ 'justify-content': 'center' }}>
-          <Grid item xs={4} sx={{ margin: 'auto', fontSize: 'h6.fontSize' }}>
+          <Grid item xs={4} sx={{ margin: 'auto', fontSize: 'h3.fontSize' }}>
             No exercise selected
           </Grid>
         </Grid>
       );
     }
-
     return <ExerciseDetails exercise={exercise} />;
   };
 
   return (
     <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 4fr ', gap: '4' }}>
       <ul>
-        <h2>List of exercises/History/</h2>
-
+        <h2>List of Exercises</h2>
         <Button
           variant="text"
           color="primary"
           startIcon={<AddCircleOutline />}
           onClick={() => {
-            // setNewExercise(true);
             setExercise({} as any as Exercise);
           }}
         >
@@ -68,7 +64,6 @@ function Exercises() {
         </Button>
         {showExercises(exercises)}
       </ul>
-
       {showExerciseDetails(exercise)}
     </Box>
   );

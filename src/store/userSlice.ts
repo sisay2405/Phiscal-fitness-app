@@ -1,15 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { User } from 'firebase/auth';
 
-// const initialState = {
-//   isAuthenticated: false,
-//   firstName: '',
-//   lastName: '',
-//   email: '',
-//   authError: '',
-// } ;
-
 const initialState = {
+  value: {},
   user: null as User | null,
   authError: null as null | string,
 };
@@ -19,13 +12,13 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUser(state, { payload }: { payload: User }) {
-      // return { user: payload, authError: null };
-      // state = { user: payload, authError: null };
       state.authError = null;
       state.user = payload;
+      console.log('USER', state.user);
     },
     clearUser(state) {
       state.authError = null;
+      state.user = null;
     },
 
     setAuthError(state, { payload }: { payload: string }) {

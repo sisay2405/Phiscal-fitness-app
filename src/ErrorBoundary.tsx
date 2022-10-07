@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React, { Component, ErrorInfo, ReactNode } from 'react';
 
 type ErrorBoundaryProps = {

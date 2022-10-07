@@ -21,10 +21,11 @@ const GlobalStyle = createGlobalStyle`
       border-radius:10px;
     }
   }
-  .g-btn {
-    height: 40px !important;
-    line-height: 40px !important;
-    font-size: 15px !important;
+  .newExerciseTitle {
+    color: orange;
+  }
+  .ExerciseType {
+    color: orange;
   }
   .login-with-google-btn {
     transition: background-color 0.3s, box-shadow 0.3s;

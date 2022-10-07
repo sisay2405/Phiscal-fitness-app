@@ -59,9 +59,10 @@ function Navbar() {
 
   const handleSignOut = async () => {
     await signOut();
+    console.log('logout working');
+    // !user
     navigate('/');
   };
-
   return (
     <StyleHeaderWrapper>
       <Link to="/">
@@ -92,6 +93,9 @@ function Navbar() {
               </li>
               <li>
                 <NavLink to="/profile">{user.displayName}</NavLink>
+              </li>
+              <li>
+                <NavLink to="/previousWork">Previous Exercise</NavLink>
               </li>
               <li>
                 <div className="logoutbutton">
