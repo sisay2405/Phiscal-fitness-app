@@ -21,7 +21,12 @@ const GlobalStyle = createGlobalStyle`
       border-radius:10px;
     }
   }
-  
+  .newExerciseTitle {
+    color: orange;
+  }
+  .ExerciseType {
+    color: orange;
+  }
   .login-with-google-btn {
     transition: background-color 0.3s, box-shadow 0.3s;
     padding: 12px 16px 12px 42px;

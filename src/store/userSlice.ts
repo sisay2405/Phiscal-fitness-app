@@ -14,6 +14,7 @@ export const userSlice = createSlice({
     setUser(state, { payload }: { payload: User }) {
       state.authError = null;
       state.user = payload;
+      console.log('USER', state.user);
     },
     clearUser(state) {
       state.authError = null;

@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import {
   createUserWithEmailAndPassword,
+  updateProfile,
   getAuth,
   signInWithPopup,
   GoogleAuthProvider,
@@ -22,9 +23,12 @@ type User = {
 };
 
 type NewUser = User & {
+  email: string;
+  password: string;
   firstName: string;
   lastName: string;
   isAdmin: boolean;
+  displayName: string;
 };
 
 const firebaseConfig = {
@@ -72,9 +76,10 @@ const updateUser = async (user: FirebaseUser) => {
   dispatchError('User data not found!');
 };
 
-const signUp = async ({ firstName, lastName, email, password, isAdmin = false }: NewUser) => {
+const signUp = async ({ firstName, lastName, email, password, isAdmin = false, displayName = 'sisay' }: NewUser) => {
   try {
     await createUserWithEmailAndPassword(auth, email, password);
+    await updateProfile(auth.currentUser as any, { displayName: displayName }).catch((err) => console.log(err));
     await setDoc(doc(db, 'users', email), {
       firstName,
       lastName,
@@ -108,8 +113,6 @@ onAuthStateChanged(auth, async (user) => {
   if (user) {
     await updateUser(user);
     store.dispatch(setUser(user));
-  } else {
-    store.dispatch(clearUser());
   }
 });
 

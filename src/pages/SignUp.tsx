@@ -106,12 +106,13 @@ const formDefaults = {
   password: '',
   verifyPassword: '',
   isAdmin: false,
+  displayName: '',
 };
 function Signup() {
   const dispatch = useAppDispatch();
   const { authError } = useAuth();
   const [formData, setFormData] = useState(formDefaults);
-  const { firstName, lastName, email, password, verifyPassword } = formData;
+  const { firstName, lastName, email, password, verifyPassword, displayName } = formData;
   useProfileRedirect();
 
   useEffect(() => {
@@ -157,6 +158,18 @@ function Signup() {
           <label htmlFor="lastName">
             Last Name:
             <input id="lastName" type="lastName" name="lastName" value={lastName} placeholder="Last Name" required onChange={handleInputChange} />
+          </label>
+          <label htmlFor="displayName">
+            Display Name:
+            <input
+              id="DisplayName"
+              type="displayname"
+              name="displayName"
+              value={displayName}
+              placeholder="display Name"
+              required
+              onChange={handleInputChange}
+            />
           </label>
           <label htmlFor="email">
             Email:

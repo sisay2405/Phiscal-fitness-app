@@ -1,3 +1,4 @@
+/* eslint-disable no-constant-condition */
 // import React from 'react';
 // // import Exercises from './Exercises';
 
@@ -32,9 +33,11 @@
 // export default PreviousWorkout;
 
 import { Box } from '@mui/system';
+import Loader from 'components/Loader';
 import React from 'react';
 
 function PreviousExercises() {
+  if (false) return <Loader />;
   return (
     <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 4fr ', gap: '4' }}>
       <ul>
