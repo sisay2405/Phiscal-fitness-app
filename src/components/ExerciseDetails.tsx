@@ -21,7 +21,7 @@ function ExerciseDetails({ exercise }: { exercise: Exercise }) {
       duration: null,
     };
 
-    console.log('calling makeNewExercise', result);
+    // console.log('calling makeNewExercise', result);
     return result;
   }, []);
 
@@ -72,7 +72,7 @@ function ExerciseDetails({ exercise }: { exercise: Exercise }) {
       <form className="flex-column padding " onSubmit={makeSubmitHandler}>
         <Stack spacing={5}>
           <h2>
-            {getOperation(exerciseData)} Exercise {exerciseData.type}
+            <span className="newExerciseTitle">{getOperation(exerciseData)}</span> Exercise <span className="ExerciseType">{exerciseData.type}</span>
           </h2>
           <FormControl fullWidth>
             <Autocomplete
@@ -137,10 +137,8 @@ function ExerciseDetails({ exercise }: { exercise: Exercise }) {
               aria-label="add a rep to workout"
               onClick={() => setExerciseField('reps', [...(exerciseData.reps || []), { number: reps, startTime: new Date().toISOString() }])}
             >
-              <div>Add reps</div>
               <AddCircleOutlineRounded />
             </IconButton>
-            {/* <div>Date</div> */}
             <TextField
               id="startTime"
               // label="Start Time"

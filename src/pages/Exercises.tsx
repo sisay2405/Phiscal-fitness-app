@@ -39,7 +39,7 @@ function Exercises() {
     if (!exercise) {
       return (
         <Grid container sx={{ 'justify-content': 'center' }}>
-          <Grid item xs={4} sx={{ margin: 'auto', fontSize: 'h6.fontSize' }}>
+          <Grid item xs={4} sx={{ margin: 'auto', fontSize: 'h3.fontSize' }}>
             No exercise selected
           </Grid>
         </Grid>
