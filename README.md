@@ -32,3 +32,12 @@ Add and remove sets
 For each set, add weight and reps
 For each set, mark as finished or unfinished
 
+
+if first time signin
+take to profile
+auto profile with info
+
+let update the username
+age
+weight
+bmi
