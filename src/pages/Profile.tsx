@@ -1,4 +1,4 @@
-import { Button, FormControl, Stack } from '@mui/material';
+import { Button, Stack } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { Box } from '@mui/system';
 import Error from 'components/Error';
@@ -28,7 +28,7 @@ function Profile(): React.ReactElement {
     return <Error message={authError} />;
   }
 
-  const { email, displayName } = user;
+  const { email, displayName, photoURL } = user;
 
   return (
     <main className="profilemain">
@@ -38,7 +38,7 @@ function Profile(): React.ReactElement {
             <Grid item direction="column">
               <Box sx={{ borderRadius: '50%' }}>
                 <img src="https://th.bing.com/th/id/R.e6717254470eaf137158f3be5c96c83e?rik=8m6MRRgeuqO5rQ&pid=ImgRaw&r=0" alt="" width="90px" />
-                <img src="https://th.bing.com/th/id/R.e6717254470eaf137158f3be5c96c83e?rik=8m6MRRgeuqO5rQ&pid=ImgRaw&r=0" alt="" width="90px" />
+                <img src={user.photoURL! as string} alt="profile" />
               </Box>
               <Button variant="text" color="primary">
                 change
@@ -51,6 +51,7 @@ function Profile(): React.ReactElement {
             <>
               <h2>Name: {displayName}</h2>
               <h2>E Mail: {email}</h2>
+              <img src={photoURL! as string} alt="profile" />
             </>
           ) : (
             <>
@@ -60,18 +61,6 @@ function Profile(): React.ReactElement {
           )}
         </Stack>
       </ProfileWrapper>
-      <Box>
-        {' '}
-        {/* displayname */}
-        <FormControl>
-          {/* <FormLabel>DisplayName</FormLabel> */}
-
-          {/* <TextField id="displayname" label="Display name" value={userprofile.displayName} /> */}
-        </FormControl>
-        {/* age */}
-        {/* weight */}
-        {/* goal */}
-      </Box>
     </main>
   );
 }
