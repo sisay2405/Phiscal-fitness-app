@@ -1,52 +1,69 @@
-import Typography from '@mui/material/Typography';
-import { Box, Stack } from '@mui/system';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import useAuth from '../utils/useAuths';
-import HeroBannerImage from '../assets/images/banner.png';
+import Hero from '../assets/images/bycle.png';
 
+const Wrapper = styled.div`
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 3rem;
+  div {
+    @media (min-width: 700px) {
+      width: 50%;
+      p {
+        font-size: 3rem;
+      }
+    }
+    p {
+      text-transform: uppercase;
+      font-weight: 800;
+      color: #f88740;
+      border-left: 10px solid #2a8572;
+      padding: 0px 20px;
+      font-size: 2.3rem;
+    }
+    span {
+      color: #2a8572;
+    }
+  }
+`;
+const ImageWrapper = styled.div`
+  filter: drop-shadow(0 -1mm 10mm rgb(206, 196, 210));
+  width: 500px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+`;
 function Home() {
   const { user } = useAuth();
-
   return (
-    <div>
-      <Box sx={{ display: 'flex', justifyContent: 'space-around', p: 1, m: 1, bgcolor: 'background.paper', borderRadius: 1 }} position="relative" p="20px">
-        <Typography fontWeight={700} sx={{ fontSize: { lg: '44px', xs: '40px' } }} mb="23px" mt="30px">
-          Sweat, Smile <br />
-          And Repeat
-          <Stack>
-            <a
-              href="#exercises"
-              style={{
-                marginTop: '45px',
-                textDecoration: 'none',
-                width: '700px',
-                textAlign: 'center',
-                background: '#FF2625',
-                padding: '14px',
-                fontSize: '22px',
-                textTransform: 'none',
-                color: 'white',
-                borderRadius: '4px',
-              }}
-            >
-              Check out the most effective exercises personalized to you
-            </a>
-          </Stack>
-          <Typography fontWeight={600} color="#FF2625" sx={{ opacity: '0.1', display: { lg: 'block', xs: 'none' }, fontSize: '200px' }}>
-            Exercise
-          </Typography>
-          <Stack direction="column" rowGap={5} sx={{ fontSize: { lg: '30px', xs: '30px' } }}>
+    <main>
+      <Wrapper>
+        <div>
+          <p>Work hard to become strong</p>
+          <span>
+            since what we do with our bodies also affects what we can do with our minds, fitness influences to some degree qualities such as mental alertness
+            and emotional stability.
+          </span>{' '}
+          <hr /> <br />
+          <div>
             {!user && (
               <span>
                 Do you need to <Link to="/signin">sign in</Link> or <Link to="/signup">sign up</Link>?
               </span>
-            )}
-          </Stack>
-        </Typography>
-        <img src={HeroBannerImage} alt="hero-banner" className="hero-banner-img" />
-      </Box>
-    </div>
+            )}{' '}
+          </div>
+        </div>
+        <ImageWrapper>
+          <img src={Hero} alt="" />
+        </ImageWrapper>
+      </Wrapper>
+    </main>
   );
 }
 
