@@ -6,7 +6,6 @@ import Home from './pages/Home';
 import Layout from './pages/Layout';
 import NotFound from './pages/NotFound';
 import Profile from './pages/Profile';
-import PreviousWork from './pages/PreviosWorkout';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import useAuth from './utils/useAuths';
@@ -23,7 +22,6 @@ function ProtectedRoutes({ routes }: { routes: Array<RouteConfig> }) {
   const { user } = useAuth();
 
   if (!authHandler(user)) {
-    // console.log('ProtectedRoutes.authHandler.fired', { user });
     return <Navigate to="/signin" />;
   }
 
@@ -42,10 +40,9 @@ function App() {
   const routes: Array<RouteConfig> = [
     { path: 'profile', element: <Profile />, authHandler: mustBeLoggedIn },
     { path: 'exercises', element: <Exercises />, authHandler: mustBeLoggedIn },
-    { path: 'previousWork', element: <PreviousWork />, authHandler: mustBeLoggedIn },
   ];
   return (
-    <div className="bg-green-400">
+    <div>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />

@@ -10,7 +10,7 @@ import {
   signOut as signOutUser,
   User as FirebaseUser,
 } from 'firebase/auth';
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, query, setDoc, updateDoc, where } from 'firebase/firestore';
 import { setExercises } from 'store/exercisesSlice';
 import { Exercise } from './type';
 
@@ -117,8 +117,10 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 export const exerciseStore = () => {
-  const fetch = () => {
-    return getDocs(collection(db, 'exercises')).then(({ docs }) => {
+  const fetch = (user_id: string = store.getState().user.user?.uid ?? 'no_user_id_providedd') => {
+    const allExercises = collection(db, 'exercises');
+    const userExercises = query(allExercises, where('user_id', '==', user_id));
+    return getDocs(userExercises).then(({ docs }) => {
       const exercises = docs.map((doc) => ({ ...doc.data(), id: doc.id }));
       console.log({ docs, exercises });
       return store.dispatch(setExercises(exercises));

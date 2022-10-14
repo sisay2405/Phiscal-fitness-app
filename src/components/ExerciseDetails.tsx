@@ -8,22 +8,22 @@ import useTimer from './useTimer';
 
 function ExerciseDetails({ exercise }: { exercise: Exercise }) {
   const setOrReps = [1, 3, 5, 7, 9];
-
   const { user } = useAuth();
-
-  const makeNewExercise = useCallback((uid: string = '') => {
-    const result = {
-      type: '',
-      endTime: '',
-      startTime: new Date().toISOString(),
-      id: uid,
-      reps: [],
-      duration: null,
-    };
-
-    // console.log('calling makeNewExercise', result);
-    return result;
-  }, []);
+  const makeNewExercise = useCallback(
+    (uid: string = '', user_id = user?.uid ?? 'no_user') => {
+      const result: Exercise = {
+        type: '',
+        endTime: '',
+        startTime: new Date().toISOString(),
+        id: uid,
+        user_id,
+        reps: [],
+        duration: null,
+      };
+      return result;
+    },
+    [user],
+  );
 
   const isValidExercise = useCallback(
     (exercise: Exercise | {} | null) => exercise && Object.keys(makeNewExercise()).every((key) => key in exercise),
@@ -33,6 +33,7 @@ function ExerciseDetails({ exercise }: { exercise: Exercise }) {
   const workoutOptions = ['', 'pull up', 'push bar', 'squats', 'abs', 'legs'];
   const [reps, setReps] = useState(0);
   const [exerciseData, setExerciseData] = useState<Exercise>(() => (isValidExercise(exercise) ? exercise : makeNewExercise(user?.uid)));
+  const [dateTimeField, setDateTimeField] = useState(new Date(exercise?.startTime ?? Date.now()));
   const timer = useTimer();
 
   useEffect(() => {
@@ -45,6 +46,9 @@ function ExerciseDetails({ exercise }: { exercise: Exercise }) {
 
   const setExerciseField = (key: keyof Exercise, value: any) => {
     setExerciseData({ ...exerciseData, [key]: value });
+    if (key === 'startTime') {
+      setDateTimeField(new Date(value));
+    }
   };
 
   const handleUpdateorCreate = (exercise: Exercise) => {
@@ -55,24 +59,27 @@ function ExerciseDetails({ exercise }: { exercise: Exercise }) {
   };
 
   const resetExercise = () => setExerciseData(makeNewExercise());
-
   const makeSubmitHandler = (event: React.FormEvent) => {
     event.preventDefault();
-    console.log('formSubmit.fired');
-
     return handleUpdateorCreate(exerciseData);
   };
 
   const getOperation = (exercise: Exercise) => (!exercise?.id?.length ? 'New' : 'Update');
 
-  if (!exerciseData) return <Box>No Exercise</Box>;
+  if (!exerciseData)
+    return (
+      <Box>
+        <Box>Please select Exercise </Box>
+      </Box>
+    );
 
   return (
-    <Box sx={{ padding: 10 }}>
+    <Box sx={{ padding: 10, 'background-color': '#e8fffa;', overflow: 'hidden' }}>
       <form className="flex-column padding " onSubmit={makeSubmitHandler}>
         <Stack spacing={5}>
           <h2>
             <span className="newExerciseTitle">{getOperation(exerciseData)}</span> Exercise <span className="ExerciseType">{exerciseData.type}</span>
+            <span>Date {exerciseData.startTime}</span>
           </h2>
           <FormControl fullWidth>
             <Autocomplete
@@ -94,7 +101,7 @@ function ExerciseDetails({ exercise }: { exercise: Exercise }) {
             />
           </FormControl>
 
-          <Box display="flex">
+          <Box component="span" sx={{ display: 'block', 'margin-bottom': '40px' }}>
             <Button variant="text" color="primary" type="submit">
               {getOperation(exerciseData)}
             </Button>
@@ -110,11 +117,13 @@ function ExerciseDetails({ exercise }: { exercise: Exercise }) {
             <TextField
               id="elapsedTime"
               label={`Elapsed time ${timer.isRunning ? 'running' : 'stopped'}`}
-              inputProps={{ style: { fontSize: 25 } }}
+              inputProps={{ style: { fontSize: 20 } }}
               InputLabelProps={{ style: { fontSize: 30 } }}
               value={`${timer.elapsedTime.value} ${timer.elapsedTime.timeUnit}`}
               color="primary"
               disabled
+              size="small"
+              sx={{ mb: '1.4rem' }}
             />
 
             <Autocomplete
@@ -124,7 +133,7 @@ function ExerciseDetails({ exercise }: { exercise: Exercise }) {
               options={setOrReps}
               selectOnFocus
               value={exerciseData.type}
-              sx={{ width: '150px' }}
+              sx={{ width: '150px', mb: '1.4rem' }}
               onChange={(event, newValue) => {
                 if (!Number.isNaN(newValue)) setReps(Number(newValue));
               }}
@@ -132,29 +141,29 @@ function ExerciseDetails({ exercise }: { exercise: Exercise }) {
                 <TextField {...params} label="Enter reps" type="number" onChange={(event) => event.target.value && setReps(parseInt(event.target.value, 10))} />
               )}
             />
-
-            <IconButton
-              aria-label="add a rep to workout"
-              onClick={() => setExerciseField('reps', [...(exerciseData.reps || []), { number: reps, startTime: new Date().toISOString() }])}
-            >
-              <AddCircleOutlineRounded />
-            </IconButton>
             <TextField
               id="startTime"
-              // label="Start Time"
               type="datetime-local"
               onChange={(event) => {
                 const currentDateTime = new Date(event.target.value);
                 console.table({ utc: currentDateTime.toUTCString(), iso: currentDateTime.toISOString() });
+                setExerciseField('startTime', currentDateTime.toISOString());
               }}
+              sx={{ mb: '1.4rem' }}
+              value={dateTimeField}
             />
-
-            <Button variant="outlined" color="primary" onClick={resetExercise}>
-              reset
-            </Button>
+            <IconButton
+              aria-label="add a rep to workout"
+              onClick={() => setExerciseField('reps', [...(exerciseData.reps || []), { number: reps, startTime: exerciseData.startTime }])}
+            >
+              <AddCircleOutlineRounded />
+            </IconButton>
+            <Box>
+              <Button variant="outlined" color="primary" onClick={resetExercise}>
+                reset
+              </Button>
+            </Box>
           </Box>
-
-          {/* reps */}
 
           <Box>
             <ol>

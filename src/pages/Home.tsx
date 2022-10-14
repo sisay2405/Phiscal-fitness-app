@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import useAuth from '../utils/useAuths';
-import Hero from '../assets/images/bycle.png';
+import Hero from '../assets/images/by-unscreen.gif';
 
 const Wrapper = styled.div`
   overflow: hidden;
@@ -31,7 +31,7 @@ const Wrapper = styled.div`
   }
 `;
 const ImageWrapper = styled.div`
-  filter: drop-shadow(0 -1mm 10mm rgb(206, 196, 210));
+  filter: drop-shadow(-15mm 15mm 1mm rgb(107, 106, 107));
   width: 500px;
   img {
     width: 100%;
@@ -50,7 +50,8 @@ function Home() {
             since what we do with our bodies also affects what we can do with our minds, fitness influences to some degree qualities such as mental alertness
             and emotional stability.
           </span>{' '}
-          <hr /> <br />
+          <br /> <br />
+          <hr />
           <div>
             {!user && (
               <span>

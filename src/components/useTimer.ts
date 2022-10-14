@@ -7,13 +7,8 @@ function useTimer() {
   const defaultIntervalPeriod = 1;
   const timeUnit: TimeUnit = 'seconds';
 
-  // let isRunning: null | NodeJS.Timer = null;
-
   const startOrPause = () => {
-    // isRunning = false and elapsedtime = 0
     if (!isRunning) {
-      // dismis the current timer
-
       setIsRunning(
         setInterval(() => {
           setElapsedTime((currentElapsedTime) => currentElapsedTime + defaultIntervalPeriod);
