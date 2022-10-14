@@ -1,113 +1,95 @@
 import React from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import useAuth from 'utils/useAuths';
-import { Stack } from '@mui/system';
-import { signOut } from '../utils/firebase';
+import { BiMenu } from 'react-icons/bi';
+import { ImCancelCircle } from 'react-icons/im';
+import Logo from '../assets/images/Logo.png';
+import NavLinks from './NavLinks';
 
 const StyleHeaderWrapper = styled.header`
+  overflow: hidden !important;
   align-items: center;
-  background-color: #f0a514;
-  color: #fefefe;
-  display: flex;
+  background-color: #e8fffa;
+  color: #ff731d;
   justify-content: space-between;
-  padding: 1rem 1.5rem;
-  & > a {
-    color: #fefefe;
+  box-shadow: -1px 9px 59px -21px rgba(0, 0, 0, 0.31);
+  -webkit-box-shadow: -1px 9px 59px -21px rgba(0, 0, 0, 0.31);
+  -moz-box-shadow: -1px 9px 59px -21px rgba(0, 0, 0, 0.31);
+  a {
+    color: #2a8572;
     text-decoration: none;
   }
   h1 {
     margin: 1rem 0;
   }
+  .logo {
+    display: flex;
+    align-items: center;
+  }
   span {
     padding: 0 1rem;
   }
-`;
-
-const StyleNavWrapper = styled.nav`
-  ul {
+  nav {
+    align-items: center;
     display: flex;
-    list-style-type: none;
-  }
-  li {
-    padding-left: 1.5rem;
-    &:first-child {
-      padding-left: 0;
+    justify-content: space-between;
+    padding: 0.4rem 1.5rem;
+    & > a {
+      color: #fefefe;
+      text-decoration: none;
     }
-  }
-  a {
-    color: #fff;
-    font-size: 1.25rem;
-    font-weight: 700;
-    text-decoration: none;
-    &:hover {
-      color: lightgrey;
-    }
-    &.active {
-      color: black;
-      font-style: italic;
-    }
-  }
-  .logoutbutton {
-    color: red;
   }
 `;
 
+const MobileMenu = styled.div`
+  color: #ff731d;
+  @media (min-width: 700px) {
+    display: none !important;
+  }
+`;
+const NavWrapper = styled.nav`
+  display: none !important;
+  @media (min-width: 700px) {
+    display: block !important;
+  }
+`;
 function Navbar() {
-  const navigate = useNavigate();
-  const { user } = useAuth();
-
-  const handleSignOut = async () => {
-    await signOut();
-    console.log('logout working');
-    // !user
-    navigate('/');
-  };
+  const [toggleMenu, setToggleMenu] = React.useState<boolean>(true);
   return (
     <StyleHeaderWrapper>
-      <Link to="/">
-        <Stack direction="row" sx={{ marginRight: 'cacl( 8 *4px )' }}>
-          <h1>Phisical Exercise</h1>
-        </Stack>
-      </Link>
-
-      <StyleNavWrapper>
-        <ul>
-          {!user && (
-            <>
-              <li>
-                <NavLink to="/signIn">Sign In</NavLink>
-              </li>
-              <li>
-                <NavLink to="/signup">Sign Up</NavLink>
-              </li>
-            </>
+      <nav>
+        <div className="logo">
+          <Link to="/">
+            <span>
+              <img src={Logo} alt="Logo" />
+            </span>
+          </Link>
+          <Link to="/">
+            <h1>Phisical Exercise</h1>
+          </Link>
+        </div>
+        <NavWrapper>
+          <NavLinks />
+        </NavWrapper>
+        <MobileMenu>
+          {toggleMenu && (
+            <BiMenu
+              size={40}
+              onClick={() => {
+                setToggleMenu(!toggleMenu);
+              }}
+            />
           )}
-          {user && (
-            <>
-              <li>
-                <NavLink to="/">Home</NavLink>
-              </li>
-              <li>
-                <NavLink to="/exercises">Exercises</NavLink>
-              </li>
-              <li>
-                <NavLink to="/profile">{user.displayName}</NavLink>
-              </li>
-              <li>
-                <NavLink to="/previousWork">Previous Exercise</NavLink>
-              </li>
-              <li>
-                <div className="logoutbutton">
-                  <button type="button" onClick={handleSignOut}>
-                    Sign Out
-                  </button>
-                </div>
-              </li>
-            </>
+          {!toggleMenu && (
+            <ImCancelCircle
+              size={40}
+              onClick={() => {
+                setToggleMenu(!toggleMenu);
+              }}
+            />
           )}
-        </ul>
-      </StyleNavWrapper>
+        </MobileMenu>
+      </nav>
     </StyleHeaderWrapper>
   );
 }

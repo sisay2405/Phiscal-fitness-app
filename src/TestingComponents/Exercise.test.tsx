@@ -1,0 +1,31 @@
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+// import userEvent from '@testing-library/user-event';
+import store from '../store';
+import Exercises from '../components/Exercises';
+
+test('render "List of Exercises" as a text', () => {
+  render(
+    <Provider store={store}>
+      <BrowserRouter>
+        <Exercises />
+      </BrowserRouter>
+    </Provider>,
+  );
+  const viewExerciseList = screen.getByText('List of Exercises');
+  expect(viewExerciseList).toBeInTheDocument();
+});
+test('should the button have attribute submit', () => {
+  render(
+    <Provider store={store}>
+      <BrowserRouter>
+        <Exercises />
+      </BrowserRouter>
+    </Provider>,
+  );
+  const buttonElement = screen.getByTestId('custom-element');
+  expect(buttonElement).toBeInTheDocument();
+  // expect(buttonElement).toHaveAttribute('type', 'submit');
+});

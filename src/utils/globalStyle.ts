@@ -6,6 +6,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
   body {
+    
     background-color: #fefefe;
     color: #333;
     font-family: Arial, Helvetica, sans-serif;

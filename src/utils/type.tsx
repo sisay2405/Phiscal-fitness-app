@@ -10,6 +10,7 @@ export type TimeUnit = 'seconds' | 'minutes';
 export interface Exercise {
   id?: string | null;
   type: string;
+  user_id: string;
   startTime: string;
   endTime: string;
   reps: Rep[];
@@ -17,6 +18,13 @@ export interface Exercise {
     value: number;
     timeUnit: TimeUnit | null;
   } | null;
+}
+
+export interface UserProfile {
+  displayName: string;
+  email: string;
+  user_id: string;
+  id?: string;
 }
 
 export {};

@@ -1,6 +1,4 @@
-import { Button, Stack } from '@mui/material';
-import Grid from '@mui/material/Grid';
-import { Box } from '@mui/system';
+import { Stack } from '@mui/material';
 import Error from 'components/Error';
 import React from 'react';
 import styled from 'styled-components';
@@ -19,6 +17,18 @@ const ProfileWrapper = styled.footer`
     font-weight: 700;
     margin-bottom: 2rem;
   }
+  .profilePhoto {
+    width: 100px;
+    height: 100px;
+    margin-top: 10px;
+    margin-left: 150px;
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
 `;
 
 function Profile(): React.ReactElement {
@@ -33,25 +43,20 @@ function Profile(): React.ReactElement {
   return (
     <main className="profilemain">
       <ProfileWrapper>
-        <Box id="topSection">
-          <Grid container spacing={0}>
-            <Grid item direction="column">
-              <Box sx={{ borderRadius: '50%' }}>
-                <img src="https://th.bing.com/th/id/R.e6717254470eaf137158f3be5c96c83e?rik=8m6MRRgeuqO5rQ&pid=ImgRaw&r=0" alt="" width="90px" />
-                <img src={user.photoURL! as string} alt="profile" />
-              </Box>
-              <Button variant="text" color="primary">
-                change
-              </Button>
-            </Grid>
-          </Grid>
-        </Box>
         <Stack direction="column">
           {displayName !== null ? (
             <>
-              <h2>Name: {displayName}</h2>
-              <h2>E Mail: {email}</h2>
-              <img src={photoURL! as string} alt="profile" />
+              <div className="profilePhoto">
+                <img
+                  className="profilePhoto"
+                  src={photoURL || 'https://th.bing.com/th/id/R.e6717254470eaf137158f3be5c96c83e?rik=8m6MRRgeuqO5rQ&pid=ImgRaw&r=0" alt="" width="90px"'}
+                  alt="#"
+                />
+              </div>
+              <div>
+                <h2>Name: {displayName}</h2>
+                <h2>E Mail: {email}</h2>
+              </div>
             </>
           ) : (
             <>

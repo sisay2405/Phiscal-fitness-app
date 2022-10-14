@@ -9,7 +9,7 @@ function PreviousExercises() {
         <h3>date: -----</h3>
         <h3>Exercise Type: -------</h3>
         <h3>Reps:------</h3>
-        <h3>completed Time: ----</h3>
+        <h3>completed: ----</h3>
       </ul>
     </Box>
   );

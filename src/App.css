@@ -1,7 +1,0 @@
-:root {
-  --green-400: #FFF7E3;
-}
-
-.bg-green-400 {
-  background: var(--green-400)
-}
