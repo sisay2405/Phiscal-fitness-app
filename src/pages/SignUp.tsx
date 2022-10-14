@@ -6,7 +6,7 @@ import { signUp } from '../utils/firebase';
 import { setAuthError } from '../store/userSlice';
 import useProfileRedirect from '../utils/useProfileRedirect';
 import Error from '../components/Error';
-import signUpimage from '../assets/images/signupimage.jpg';
+// import signUpimage from '../assets/images/signupimage.jpg';
 
 const SignupWrapper = styled.div`
   font-size: 0.8rem;
@@ -40,11 +40,6 @@ const SignupWrapper = styled.div`
       box-shadow: -5px 16px 87px -32px rgba(0, 0, 0, 0.42);
       -webkit-box-shadow: -5px 16px 87px -32px rgba(0, 0, 0, 0.42);
       -moz-box-shadow: -5px 16px 87px -32px rgba(0, 0, 0, 0.42);
-      img {
-        width: 350px;
-        height: 350px;
-        border-radius: 50%;
-      }
     }
     h2 {
       text-align: center;
@@ -141,12 +136,6 @@ function Signup() {
 
   return (
     <SignupWrapper>
-      <section>
-        <h2>Get Stronger with Effective Exercises.</h2>
-        <div className="image">
-          <img src={signUpimage} alt="Physical fitness" />
-        </div>
-      </section>
       <main>
         <h2>Sign Up</h2>
         {authError && <Error message={authError} />}
@@ -199,6 +188,20 @@ function Signup() {
           Already registered? <Link to="/signin">Sign in</Link> instead!
         </p>
       </main>
+      <section>
+        <h2>Get Stronger with Effective Exercises.</h2>
+        <div className="image">
+          <iframe
+            src="https://giphy.com/embed/MkXP4OH6eO2nm"
+            width="480"
+            height="280"
+            frameBorder="0"
+            className="giphy-embed"
+            allowFullScreen
+            title="This is a unique title"
+          />
+        </div>
+      </section>
     </SignupWrapper>
   );
 }

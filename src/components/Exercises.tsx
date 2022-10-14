@@ -55,6 +55,7 @@ function Exercises() {
         <Button
           variant="text"
           color="primary"
+          data-testid="custom-element"
           startIcon={<AddCircleOutline />}
           onClick={() => {
             setExercise({} as any as Exercise);

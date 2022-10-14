@@ -1,6 +1,7 @@
 import { AddCircleOutline } from '@mui/icons-material';
 import { Divider, Grid } from '@mui/material';
 import Button from '@mui/material/Button';
+import styled from 'styled-components';
 import { Box, Stack } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -10,6 +11,27 @@ import ExerciseDetails from '../components/ExerciseDetails';
 import { Exercise } from '../utils/type';
 import { exerciseStore } from '../utils/firebase';
 
+const ExerciseWrapper = styled.div`
+  width: 90%;
+  margin: 60px auto;
+  border: solid 1px white;
+  border-radius: 20px;
+  box-shadow: -5px 16px 87px -32px rgba(0, 0, 0, 0.42);
+  -webkit-box-shadow: -5px 16px 87px -32px rgba(0, 0, 0, 0.42);
+  -moz-box-shadow: -5px 16px 87px -32px rgba(0, 0, 0, 0.42);
+`;
+const HeaderWrapper = styled.div`
+  h2 {
+    color: #2a8572;
+    width: 80%;
+    border-radius: 20px;
+    padding: 10px 5px;
+    text-align: center;
+    font-size: 28px;
+    border-bottom: 1px solid lightgray;
+    background-color: #e7f9ff;
+  }
+`;
 function Exercises() {
   const { exercises } = useSelector((state: RootState) => state);
   const [exercise, setExercise] = useState<Exercise | null>(null);
@@ -49,23 +71,28 @@ function Exercises() {
   };
 
   return (
-    <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 4fr ', gap: '4' }}>
-      <ul>
-        <h2>List of Exercises</h2>
-        <Button
-          variant="text"
-          color="primary"
-          startIcon={<AddCircleOutline />}
-          onClick={() => {
-            setExercise({} as any as Exercise);
-          }}
-        >
-          New Exercise
-        </Button>
-        {showExercises(exercises)}
-      </ul>
-      {showExerciseDetails(exercise)}
-    </Box>
+    <ExerciseWrapper>
+      <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 4fr ', gap: '4', overflow: 'hidden' }}>
+        <ul>
+          <HeaderWrapper>
+            <h2 className="List-Header">List of Exercises</h2>
+          </HeaderWrapper>
+          <Button
+            variant="text"
+            color="primary"
+            startIcon={<AddCircleOutline />}
+            onClick={() => {
+              setExercise({} as any as Exercise);
+            }}
+            sx={{ mb: '2rem' }}
+          >
+            New Exercise
+          </Button>
+          {showExercises(exercises)}
+        </ul>
+        {showExerciseDetails(exercise)}
+      </Box>
+    </ExerciseWrapper>
   );
 }
 
