@@ -1,5 +1,7 @@
 <!-- PROJECT -->
+
 <a id="top"></a>
+
   <div align="center">
   <h1 align="center">Physical Fitness</h1>
     <a href="https://github.com/sisay2405/Physical-fitness">
@@ -33,7 +35,12 @@
 
 ## About The Project
 
-This app build with the existing knowledge of the React basics, and give you further practice working with codebase linting, component testing, Redux Toolkit, and TypeScript. A user should, at the bare minimum: exercise (add exercise, [pushup, pull, number, completed/not] save to storage , loop)  \* Create complex workouts easily  \*Define your own exercises with custom durations \* Add , update and remove exercises.
+This app build with the existing knowledge of the React basics, and give you further practice working with codebase linting, component testing, Redux Toolkit, and TypeScript. A user should, at the bare minimum:
+
+- exercise (add exercise, [pushup, pull, number, completed/not] save to storage , loop)
+- Create complex workouts easily
+- Define your own exercises with custom durations
+- update and remove exercises
 
 This app used Redux Toolkit and state slices to manage any state data needed across multiple components. In the case where data is created and used only within one component (or possibly one and a few of its direct children), consider using useState() or useReducer() and traditional prop drilling. Most apps will use a combination of "local" state management (useState() and useReducer()) and "global" state management (Redux or Context API).
 
@@ -41,7 +48,7 @@ Apply the TypeScript static typing system. try to use TypeScript for the majorit
 
 Use the `BLANK_README.md` to get started.
 
-<a  align="right" href="#top">Back to top</a>
+<p><a  align="right" href="#top">Back to top</a></p>
 
 ### Built With
 
@@ -65,12 +72,12 @@ A few of the frameworks/libraries that were used to build the project are:
 <img src="https://raw.githubusercontent.com/sisay2405/Physical-fitness/feature/readme/src/assets/images/signinwireframe.png"
         alt="sign in page"
              height="250" width="500">
-            
+
 <img src="https://raw.githubusercontent.com/sisay2405/Physical-fitness/feature/readme/src/assets/images/signupwireframe.png"
         alt="sign up page"
              height="250" width="500">
-             
-<a  align="right" href="#top">Back to top</a>
+
+<p><a  align="right" href="#top">Back to top</a></p>
 <!-- GETTING STARTED -->
 
 ## Getting Started
@@ -96,7 +103,7 @@ To get a local copy up and running follow these simple example steps.
    ```sh
    npm install
    ```
-4. Enter your firebase link in your `.env` file in your backend
+4. Enter your firebase configuration details in your `.env` file in your backend
    ```js
    REACT_APP_FIREBASE_API_KEY = 'ENTER YOUR API KEY';
    REACT_APP_FIREBASE_AUTH_DOMAIN = 'ENTER YOUR FIREBASE_AUTH_DOMAIN';
@@ -107,21 +114,20 @@ To get a local copy up and running follow these simple example steps.
    ```
 5. npm start for START the app.
 
-<a  align="right" href="#top">Back to top</a>
+<p><a  align="right" href="#top">Back to top</a></p>
 <!-- USAGE EXAMPLES -->
 
 ## Usage
 
 Can be used to workout the Exercises your can create your own physical fiteness web app and share it with your community. You can:
 
-- [x] creat, customezie Exercises
+- [x] Creat, Customize Exercises
 - [x] Add Exercises
 - [x] Delete Exercises
 - [x] Edit Exercises
 - [x] User Sign In/Sign Up
 - [x] To creat your Exercises you will need to sign in/sign up
 
-<a  align="right" href="#top">Back to top</a>
 <!-- CONTACT -->
 
 ## Contact
@@ -129,11 +135,12 @@ Can be used to workout the Exercises your can create your own physical fiteness 
 Sisay Areaya - sareaya@alphaworks.tech , abrehasisay04@gmail.com
 
 Project Link: <a href="https://github.com/sisay2405/phiscal-fitness-app"> Physical Fitness
-            </a>
-<a  align="right" href="#top">Back to top</a>
+</a>
+
 <!-- LICENSE -->
 
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
-<a  align="right" href="#top">Back to top</a>
+
+<p><a  align="right" href="#top">Back to top</a></p>
