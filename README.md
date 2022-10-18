@@ -3,7 +3,7 @@
    Phisical Fitness
     <br />
     <a href="https://github.com/blockbasti/just_another_workout_timer/releases/latest">
-        <img src="/assets/images/get-it-on-github.png"
+        <img src="/assets/images/github.png"
         alt="Get it on GitHub"
              height="80"></a>
     <br />
@@ -56,18 +56,17 @@ A few of the frameworks/libraries that were used to build the project are:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### wireframe
+### Wireframe using Figma 
   ### Getting Started The App build out with simple wireframes using Figma.
-<img width="328" alt="wirefram-backend-blog-app" src="https://www.figma.com/file/jwzywj8b0cGicjdiEEjG6q/Untitled?node-id=0%3A1">
 <img src="/assets/images/homewireframe.png"
         alt="home page"
-             height="80"></a>
+             height="80">
 <img src="/assets/images/signinwireframe.png"
         alt="sign in page"
-             height="80"></a>
+             height="80">
 <img src="/assets/images/signupwireframe.png"
         alt="sign up page"
-             height="80"></a>
+             height="80">
 ### How To Backup & Restore Your Workouts
 You can export individual workouts or create an export of all your workouts and import them later. You can also transfer them to another device.
 
