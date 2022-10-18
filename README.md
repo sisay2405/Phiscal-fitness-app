@@ -59,13 +59,13 @@ A few of the frameworks/libraries that were used to build the project are:
 ### wireframe
   ### Getting Started The App build out with simple wireframes using Figma.
 <img width="328" alt="wirefram-backend-blog-app" src="https://www.figma.com/file/jwzywj8b0cGicjdiEEjG6q/Untitled?node-id=0%3A1">
-<img src="/assets/images/homewireframe"
+<img src="/assets/images/homewireframe.png"
         alt="home page"
              height="80"></a>
-<img src="/assets/images/signinwireframe"
+<img src="/assets/images/signinwireframe.png"
         alt="sign in page"
              height="80"></a>
-<img src="/assets/images/signupwireframe"
+<img src="/assets/images/signupwireframe.png"
         alt="sign up page"
              height="80"></a>
 ### How To Backup & Restore Your Workouts
