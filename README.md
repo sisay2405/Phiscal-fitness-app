@@ -64,7 +64,7 @@ A few of the frameworks/libraries that were used to build the project are:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Wireframe using Figma
+### wireframe
 
 ### Getting Started The App build out with simple wireframes using Figma.
 
@@ -95,8 +95,6 @@ To get a local copy up and running follow these simple example steps.
   ```
 
 ### Installation
-
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
 1. Get a free account at for firebase to create your own collection and add it to your .env file to connect your API to your Data base
 2. Clone the repo
