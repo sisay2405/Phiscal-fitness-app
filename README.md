@@ -62,7 +62,7 @@ A few of the frameworks/libraries that were used to build the project are:
 - EsLint and AirBnb
 - Typescript
 
-### Wireframe using Figma
+### wireframe
 
 ### Getting Started The App build out with simple wireframes using Figma.
 
