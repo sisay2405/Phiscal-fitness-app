@@ -140,7 +140,8 @@ Sisay Areaya - sareaya@alphaworks.tech , abrehasisay04@gmail.com
 
 Project Link: <a href="https://github.com/sisay2405/phiscal-fitness-app"> Phisical Fitness
             </a>
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+            
+<a  align="right" href="#top">Back to top</a>
 
 <!-- LICENSE -->
 
