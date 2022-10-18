@@ -1,7 +1,7 @@
 <!-- PROJECT -->
 <a id="top"></a>
   <div align="center">
-  <h1 align="center">Physical fitness</h1> 
+  <h1 align="center">Phisical Fitness</h1>
     <a href="https://github.com/sisay2405/phiscal-fitness-app">
         <img width="250" height="80"alt="Github" src="https://raw.githubusercontent.com/sisay2405/phiscal-fitness-app/feature/readme/src/assets/images/github.png">
             </a>
@@ -41,20 +41,19 @@ Apply the TypeScript static typing system. try to use TypeScript for the majorit
 
 Use the `BLANK_README.md` to get started.
 
+<a  align="right" href="#top">Back to top</a>
 
 ### Built With
 
 A few of the frameworks/libraries that were used to build the project are:
 
-- React
+- [![React][react.js]][react-url]
 - Firebase
 - React Redux
 - Axios
 - React Router
 - EsLint and AirBnb
 - Typescript
-
-
 
 ### Wireframe using Figma
 
@@ -75,6 +74,9 @@ A few of the frameworks/libraries that were used to build the project are:
 <!-- GETTING STARTED -->
 
 ## Getting Started
+
+This is an example of how you may give instructions on setting up your project locally.
+To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
