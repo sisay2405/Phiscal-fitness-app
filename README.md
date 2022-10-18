@@ -47,7 +47,7 @@ Use the `BLANK_README.md` to get started.
 
 A few of the frameworks/libraries that were used to build the project are:
 
-- [![React][react.js]][react-url]
+- React
 - Firebase
 - React Redux
 - Axios
