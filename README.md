@@ -41,6 +41,7 @@ Apply the TypeScript static typing system. try to use TypeScript for the majorit
 
 Use the `BLANK_README.md` to get started.
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
 
@@ -54,7 +55,7 @@ A few of the frameworks/libraries that were used to build the project are:
 - EsLint and AirBnb
 - Typescript
 
-
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Wireframe using Figma
 
@@ -112,7 +113,8 @@ _Below is an example of how you can instruct your audience on installing and set
    ```
 5. npm start for START the app.
 
-<a  align="right" href="#top">Back to top</a>
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 <!-- USAGE EXAMPLES -->
 
 ## Usage
@@ -126,7 +128,8 @@ Can be used to workout the Exercises your can create your own phisical finteness
 - [x] User Sign In/Sign Up
 - [x] To creat your Exercises you will need to sign in/sign up
 
-<a  align="right" href="#top">Back to top</a>
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 <!-- CONTACT -->
 
 ## Contact
@@ -135,7 +138,8 @@ Sisay Areaya - sareaya@alphaworks.tech , abrehasisay04@gmail.com
 
 Project Link: <a href="https://github.com/sisay2405/phiscal-fitness-app"> Phisical Fitness
             </a>
-<a  align="right" href="#top">Back to top</a>
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 <!-- LICENSE -->
 
 ## License
