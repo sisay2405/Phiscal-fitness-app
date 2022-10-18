@@ -81,6 +81,7 @@ function Exercises() {
             variant="text"
             color="primary"
             startIcon={<AddCircleOutline />}
+            data-testid="exercises-list"
             onClick={() => {
               setExercise({} as any as Exercise);
             }}

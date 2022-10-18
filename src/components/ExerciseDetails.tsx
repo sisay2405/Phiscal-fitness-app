@@ -30,7 +30,23 @@ function ExerciseDetails({ exercise }: { exercise: Exercise }) {
     [makeNewExercise],
   );
 
-  const workoutOptions = ['', 'pull up', 'push bar', 'squats', 'abs', 'legs'];
+  const workoutOptions = [
+    '',
+    'Sit-Up',
+    'Pullups',
+    'Pushups',
+    'Body-Up',
+    'Butt-Ups',
+    'Air Bike',
+    'Arm Circles',
+    'Bicycling',
+    'Leg Pull-In',
+    'Squats',
+    'Split Squats',
+    'Stomach Vacuum',
+    'All Fours Quad Stretch',
+    'Legs',
+  ];
   const [reps, setReps] = useState(0);
   const [exerciseData, setExerciseData] = useState<Exercise>(() => (isValidExercise(exercise) ? exercise : makeNewExercise(user?.uid)));
   const [dateTimeField, setDateTimeField] = useState(new Date(exercise?.startTime ?? Date.now()));
