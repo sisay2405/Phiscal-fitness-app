@@ -2,11 +2,11 @@
   <p align="center">
    Phisical Fitness
     <br />
-    <a href="https://github.com/blockbasti/just_another_workout_timer/releases/latest">
         <img src="/assets/images/github.png"
-        alt="Get it on GitHub"
+        alt="GitHub"
              height="80"></a>
     <br />
+    ![Github](https://github.com/sisay2405/phiscal-fitness-app/blob/feature/readme/src/assets/images/github.png)
 <!-- TABLE OF CONTENTS -->
 <details open="open">
   <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
