@@ -1,8 +1,8 @@
 <!-- PROJECT -->
 <a id="top"></a>
   <div align="center">
-  <h1 align="center">Phisical Fitness</h1>
-    <a href="https://github.com/sisay2405/phiscal-fitness-app">
+  <h1 align="center">Physical Fitness</h1>
+    <a href="https://github.com/sisay2405/Physical-fitness">
         <img width="250" height="80"alt="Github" src="https://raw.githubusercontent.com/sisay2405/phiscal-fitness-app/feature/readme/src/assets/images/github.png">
             </a>
 </div>
@@ -59,14 +59,14 @@ A few of the frameworks/libraries that were used to build the project are:
 
 ### Getting Started The App build out with simple wireframes using Figma.
 
-<img src="https://raw.githubusercontent.com/sisay2405/phiscal-fitness-app/feature/readme/src/assets/images/homewireframe.png"
+<img src="https://raw.githubusercontent.com/sisay2405/Physical-fitness/feature/readme/src/assets/images/homewireframe.png"
         alt="home page"
              height="250" width="500">
-<img src="https://raw.githubusercontent.com/sisay2405/phiscal-fitness-app/feature/readme/src/assets/images/signinwireframe.png"
+<img src="https://raw.githubusercontent.com/sisay2405/Physical-fitness/feature/readme/src/assets/images/signinwireframe.png"
         alt="sign in page"
              height="250" width="500">
             
-<img src="https://raw.githubusercontent.com/sisay2405/phiscal-fitness-app/feature/readme/src/assets/images/signupwireframe.png"
+<img src="https://raw.githubusercontent.com/sisay2405/Physical-fitness/feature/readme/src/assets/images/signupwireframe.png"
         alt="sign up page"
              height="250" width="500">
              
@@ -90,7 +90,7 @@ To get a local copy up and running follow these simple example steps.
 1. Get a free account at for firebase to create your own collection and add it to your .env file to connect your API to your Data base
 2. Clone the repo
    ```sh
-   git clone https://github.com/sisay2405/phiscal-fitness-app
+   git clone https://github.com/sisay2405/Physical-fitness
    ```
 3. Install NPM packages
    ```sh
@@ -112,7 +112,7 @@ To get a local copy up and running follow these simple example steps.
 
 ## Usage
 
-Can be used to workout the Exercises your can create your own phisical finteness web app and share it with your community. You can:
+Can be used to workout the Exercises your can create your own physical fiteness web app and share it with your community. You can:
 
 - [x] creat, customezie Exercises
 - [x] Add Exercises
@@ -128,7 +128,7 @@ Can be used to workout the Exercises your can create your own phisical finteness
 
 Sisay Areaya - sareaya@alphaworks.tech , abrehasisay04@gmail.com
 
-Project Link: <a href="https://github.com/sisay2405/phiscal-fitness-app"> Phisical Fitness
+Project Link: <a href="https://github.com/sisay2405/phiscal-fitness-app"> Physical Fitness
             </a>
 <a  align="right" href="#top">Back to top</a>
 <!-- LICENSE -->
