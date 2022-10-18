@@ -143,7 +143,9 @@ function SignIn() {
             Password:
             <input id="password" type="password" name="password" value={password} placeholder="S3cr3tPW!" onChange={handleInputChange} />
           </label>
-          <button type="submit">Submit</button>
+          <button type="submit" data-testid="custom-element">
+            Submit
+          </button>
           <div>
             <button type="button" className="login-with-google-btn" onClick={handleGoogleSignIn}>
               Sign in with Google

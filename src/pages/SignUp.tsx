@@ -103,7 +103,7 @@ const formDefaults = {
   isAdmin: false,
   displayName: '',
 };
-function Signup() {
+function SignUp() {
   const dispatch = useAppDispatch();
   const { authError } = useAuth();
   const [formData, setFormData] = useState(formDefaults);
@@ -180,7 +180,7 @@ function Signup() {
               onChange={handleInputChange}
             />
           </label>
-          <button className="register_button" type="submit">
+          <button className="register_button" type="submit" data-testid="custom-element" disabled={!formData}>
             <span>REGISTER</span>
           </button>
         </form>
@@ -205,4 +205,4 @@ function Signup() {
     </SignupWrapper>
   );
 }
-export default Signup;
+export default SignUp;
