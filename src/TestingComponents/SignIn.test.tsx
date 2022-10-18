@@ -26,6 +26,7 @@ test('should the button have attribute submit', () => {
   );
   const buttonElement = screen.getByTestId('custom-element');
   expect(buttonElement).toBeInTheDocument();
+  expect(buttonElement).toHaveAttribute('type', 'submit');
 });
 test('should the input has a place holder Enter email address..', () => {
   render(
@@ -49,4 +50,5 @@ test('should render a button', () => {
   );
   const buttonElement = screen.getByRole('button', { name: /Submit/i });
   expect(buttonElement).toBeInTheDocument();
+  expect(buttonElement).toHaveAttribute('type', 'submit');
 });
