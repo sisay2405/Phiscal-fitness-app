@@ -1,7 +1,7 @@
 <!-- PROJECT -->
 <a id="top"></a>
   <div align="center">
-  <h1 align="center">Physical fitness</h1> 
+  <h1 align="center">Physical Fitness</h1>
     <a href="https://github.com/sisay2405/phiscal-fitness-app">
         <img width="250" height="80"alt="Github" src="https://raw.githubusercontent.com/sisay2405/phiscal-fitness-app/feature/readme/src/assets/images/github.png">
             </a>
@@ -46,7 +46,7 @@ Use the `BLANK_README.md` to get started.
 
 A few of the frameworks/libraries that were used to build the project are:
 
-- React
+- [![React][react.js]][react-url]
 - Firebase
 - React Redux
 - Axios
@@ -70,11 +70,16 @@ A few of the frameworks/libraries that were used to build the project are:
 <img src="https://raw.githubusercontent.com/sisay2405/phiscal-fitness-app/feature/readme/src/assets/images/signupwireframe.png"
         alt="sign up page"
              height="250" width="500">
-             
-<a  align="right" href="#top">Back to top</a>
+             ### How To Backup & Restore Your Workouts
+
+You can export individual workouts or create an export of all your workouts and import them later. You can also transfer them to another device.
+
 <!-- GETTING STARTED -->
 
 ## Getting Started
+
+This is an example of how you may give instructions on setting up your project locally.
+To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
@@ -84,6 +89,8 @@ A few of the frameworks/libraries that were used to build the project are:
   ```
 
 ### Installation
+
+_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
 1. Get a free account at for firebase to create your own collection and add it to your .env file to connect your API to your Data base
 2. Clone the repo
