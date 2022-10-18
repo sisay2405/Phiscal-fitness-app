@@ -2,10 +2,10 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import Exercises from 'pages/Exercises';
 import store from '../store';
-import Exercises from '../components/Exercises';
 
-test('render "List of Exercises" as a text', () => {
+test('renders "List of Exercises" as a text', () => {
   render(
     <Provider store={store}>
       <BrowserRouter>
@@ -13,8 +13,8 @@ test('render "List of Exercises" as a text', () => {
       </BrowserRouter>
     </Provider>,
   );
-  const viewExerciseList = screen.getByText('List of Exercises');
-  expect(viewExerciseList).toBeInTheDocument();
+  const searchElement = screen.getByText('List of Exercises');
+  expect(searchElement).toBeInTheDocument();
 });
 test('should the button have attribute submit', () => {
   render(
@@ -24,6 +24,6 @@ test('should the button have attribute submit', () => {
       </BrowserRouter>
     </Provider>,
   );
-  const buttonElement = screen.getByTestId('custom-element');
+  const buttonElement = screen.getByTestId('exercises-list');
   expect(buttonElement).toBeInTheDocument();
 });
