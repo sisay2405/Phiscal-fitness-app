@@ -122,12 +122,10 @@ export const exerciseStore = () => {
     const userExercises = query(allExercises, where('user_id', '==', user_id));
     return getDocs(userExercises).then(({ docs }) => {
       const exercises = docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-      console.log({ docs, exercises });
       return store.dispatch(setExercises(exercises));
     });
   };
   const createOrUpdate = ({ id = '', ...exercise }: Exercise) => {
-    console.log({ exercise }, 'createOrUpdate.fired');
     if (!id?.length) {
       return addDoc(collection(db, 'exercises'), exercise).then(() => fetch());
     }

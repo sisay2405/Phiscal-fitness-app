@@ -132,7 +132,7 @@ function ExerciseDetails({ exercise }: { exercise: Exercise }) {
 
             <TextField
               id="elapsedTime"
-              label={`Elapsed time ${timer.isRunning ? 'running' : 'stopped'}`}
+              label={`Elapsed time ${timer.isRunning ? 'Running' : 'Stopped'}`}
               inputProps={{ style: { fontSize: 20 } }}
               InputLabelProps={{ style: { fontSize: 30 } }}
               value={`${timer.elapsedTime.value} ${timer.elapsedTime.timeUnit}`}
@@ -162,7 +162,7 @@ function ExerciseDetails({ exercise }: { exercise: Exercise }) {
               type="datetime-local"
               onChange={(event) => {
                 const currentDateTime = new Date(event.target.value);
-                console.table({ utc: currentDateTime.toUTCString(), iso: currentDateTime.toISOString() });
+                // console.table({ utc: currentDateTime.toUTCString(), iso: currentDateTime.toISOString() });
                 setExerciseField('startTime', currentDateTime.toISOString());
               }}
               sx={{ mb: '1.4rem' }}

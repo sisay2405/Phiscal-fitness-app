@@ -8,7 +8,6 @@ export const exerciseSlice = createSlice({
   initialState,
   reducers: {
     setExercises(state, { payload }) {
-      console.log('exerciseSlice.setxercises', { state, payload });
       state = payload;
       return state;
     },
