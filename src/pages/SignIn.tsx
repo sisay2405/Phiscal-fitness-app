@@ -91,15 +91,20 @@ const ImageWrapper = styled.div`
   }
 `;
 function SignIn() {
+  // const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { authError } = useAuth();
   const [formData, setFormData] = useState(formDefaults);
   const { email, password } = formData;
   useProfileRedirect();
-
   useEffect(() => {
     dispatch(setAuthError(''));
   }, [dispatch]);
+
+  // useEffect(() => {
+  //   dispatch(setAuthError(''));
+  //   navigate('/Home');
+  // }, [dispatch, navigate]);
 
   const handleInputChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = target;

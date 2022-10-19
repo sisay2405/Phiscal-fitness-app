@@ -25,6 +25,11 @@ const Wrapper = styled.div`
       padding: 0px 20px;
       font-size: 2.3rem;
     }
+    h3 {
+      font-family: cursive;
+      color: #f88740;
+      margin: 0.5px;
+    }
     span {
       color: #2a8572;
     }
@@ -52,6 +57,21 @@ function Home() {
           </span>{' '}
           <br /> <br />
           <hr />
+          <section>
+            <div className="image">
+              <iframe
+                src="https://giphy.com/embed/MkXP4OH6eO2nm"
+                // src="https://giphy.com/embed/rmq08QWOPjCLv9dgue/video"
+                width="800"
+                height="680"
+                frameBorder="0"
+                className="giphy-embed"
+                allowFullScreen
+                title="This is a unique title"
+              />
+            </div>
+            <h3>Get Stronger with Effective Exercises.</h3> <br />
+          </section>
           <div>
             {!user && (
               <span>

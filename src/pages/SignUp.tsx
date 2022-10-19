@@ -6,7 +6,6 @@ import { signUp } from '../utils/firebase';
 import { setAuthError } from '../store/userSlice';
 import useProfileRedirect from '../utils/useProfileRedirect';
 import Error from '../components/Error';
-// import signUpimage from '../assets/images/signupimage.jpg';
 
 const SignupWrapper = styled.div`
   font-size: 0.8rem;
@@ -23,6 +22,10 @@ const SignupWrapper = styled.div`
   border-radius: 30px;
   overflow: hidden;
   flex-wrap: wrap-reverse;
+  .cancelbtn {
+    padding: 14px 20px;
+    background-color: #f44336;
+  }
   section {
     width: 50%;
     min-width: 400px;
@@ -73,9 +76,10 @@ const SignupWrapper = styled.div`
         }
       }
       button {
+        padding: 14px 20px;
         border-radius: 8px;
         border: 1px solid lightblue;
-        background-color: blueviolet;
+        background-color: green;
         color: white;
       }
       input {
@@ -180,9 +184,20 @@ function SignUp() {
               onChange={handleInputChange}
             />
           </label>
-          <button className="register_button" type="submit" data-testid="custom-element" disabled={!formData}>
-            <span>REGISTER</span>
-          </button>
+          <p>
+            By creating an account you agree to our{' '}
+            <a href="#top" style={{ color: 'dodgerblue' }}>
+              Terms & Privacy
+            </a>
+          </p>
+          <div className="clearfix">
+            <button className="register_button" type="submit" data-testid="custom-element" disabled={!formData}>
+              <span>REGISTER</span>
+            </button>
+            <button type="button" className="cancelbtn">
+              CANCEL
+            </button>
+          </div>
         </form>
         <p>
           Already registered? <Link to="/signin">Sign in</Link> instead!
@@ -192,15 +207,19 @@ function SignUp() {
         <h2>Get Stronger with Effective Exercises.</h2>
         <div className="image">
           <iframe
-            src="https://giphy.com/embed/MkXP4OH6eO2nm"
-            width="480"
-            height="280"
+            src="https://giphy.com/embed/FaYaqb69AKg0g"
+            width="400"
+            // height="280"
             frameBorder="0"
             className="giphy-embed"
             allowFullScreen
             title="This is a unique title"
           />
         </div>
+        {/* <iframe src="https://giphy.com/embed/FaYaqb69AKg0g" width="480" height="320" frameBorder="0" className="giphy-embed" allowFullScreen />
+        <p>
+          <a href="https://giphy.com/gifs/sexy-women-working-out-FaYaqb69AKg0g">via GIPHY</a>
+        </p> */}
       </section>
     </SignupWrapper>
   );
