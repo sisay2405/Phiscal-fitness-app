@@ -5,7 +5,7 @@
   <div align="center">
   <h1 align="center">Physical Fitness</h1>
     <a href="https://github.com/sisay2405/Physical-fitness">
-        <img width="250" height="80"alt="Github" src="https://raw.githubusercontent.com/sisay2405/phiscal-fitness-app/feature/readme/src/assets/images/github.png">
+        <img width="250" height="80"alt="Github" src="https://raw.githubusercontent.com/sisay2405/Physical-fitness/development/src/assets/images/github.png">
             </a>
 </div>
 <!-- TABLE OF CONTENTS -->
@@ -66,15 +66,13 @@ A few of the frameworks/libraries that were used to build the project are:
 
 ### Getting Started The App build out with simple wireframes using Figma.
 
-<img src="https://raw.githubusercontent.com/sisay2405/Physical-fitness/feature/readme/src/assets/images/homewireframe.png"
-        alt="home page"
+<img src="https://raw.githubusercontent.com/sisay2405/Physical-fitness/development/src/assets/images/homewireframe.png"
              height="250" width="500">
-<img src="https://raw.githubusercontent.com/sisay2405/Physical-fitness/feature/readme/src/assets/images/signinwireframe.png"
-        alt="sign in page"
+             
+<img src="https://raw.githubusercontent.com/sisay2405/Physical-fitness/development/src/assets/images/signinwireframe.png"
              height="250" width="500">
 
-<img src="https://raw.githubusercontent.com/sisay2405/Physical-fitness/feature/readme/src/assets/images/signupwireframe.png"
-        alt="sign up page"
+<img src="https://raw.githubusercontent.com/sisay2405/Physical-fitness/development/src/assets/images/signupwireframe.png"
              height="250" width="500">
 
 <p><a  align="right" href="#top">Back to top</a></p>
