@@ -68,13 +68,13 @@ A few of the frameworks/libraries that were used to build the project are:
 
 ### Getting Started The App build out with simple wireframes using Figma.
 
-<img src="https://raw.githubusercontent.com/sisay2405/Physical-fitness/development/src/assets/images/homewireframe.png"
-             height="250" width="500">
-             
-<img src="https://raw.githubusercontent.com/sisay2405/Physical-fitness/development/src/assets/images/signinwireframe.png"
+<img src="/public/homewireframe.png"
+             height="250" width="500">           
+
+<img src="/public/signinwireframe.png"
              height="250" width="500">
 
-<img src="https://raw.githubusercontent.com/sisay2405/Physical-fitness/development/src/assets/images/signupwireframe.png"
+<img src="/public/signupwireframe.png"
              height="250" width="500">
              
 <a  align="right" href="#top">Back to top</a>

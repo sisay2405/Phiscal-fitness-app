@@ -14,10 +14,10 @@ const SignupWrapper = styled.div`
   box-shadow: -5px 16px 87px -32px rgba(0, 0, 0, 0.42);
   -webkit-box-shadow: -5px 16px 87px -32px rgba(0, 0, 0, 0.42);
   -moz-box-shadow: -5px 16px 87px -32px rgba(0, 0, 0, 0.42);
-  margin: 10px auto;
+  margin: 1px auto;
   background-color: #fcfbf4;
   display: flex;
-  margin-bottom: 100px;
+  // margin-bottom: 100px;
   justify-content: center;
   border-radius: 30px;
   overflow: hidden;
@@ -65,7 +65,7 @@ const SignupWrapper = styled.div`
       flex-direction: column;
       label {
         display: block;
-        margin-bottom: 9px;
+        margin-bottom: 8px;
         font-weight: 600;
       }
       .checkbox {

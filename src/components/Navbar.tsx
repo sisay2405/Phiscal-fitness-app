@@ -33,7 +33,7 @@ const StyleHeaderWrapper = styled.header`
     align-items: center;
     display: flex;
     justify-content: space-between;
-    padding: 0.4rem 1.5rem;
+    padding: 0.2rem 1.5rem;
     & > a {
       color: #fefefe;
       text-decoration: none;
