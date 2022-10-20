@@ -9,7 +9,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin-top: 3rem;
   div {
     @media (min-width: 700px) {
       width: 50%;
@@ -17,21 +16,24 @@ const Wrapper = styled.div`
         font-size: 3rem;
       }
     }
+  }
     p {
       text-transform: uppercase;
       font-weight: 800;
       color: #f88740;
       border-left: 10px solid #2a8572;
       padding: 0px 20px;
+      margin-top: 0.5rem;;
       font-size: 2.3rem;
     }
     h3 {
       font-family: cursive;
       color: #f88740;
-      margin: 0.5px;
+      margin: 0px;
     }
     span {
       color: #2a8572;
+      margin: 0.1px;
     }
   }
 `;
@@ -55,15 +57,14 @@ function Home() {
             since what we do with our bodies also affects what we can do with our minds, fitness influences to some degree qualities such as mental alertness
             and emotional stability.
           </span>{' '}
-          <br /> <br />
+          <br />
           <hr />
           <section>
             <div className="image">
               <iframe
                 src="https://giphy.com/embed/MkXP4OH6eO2nm"
-                // src="https://giphy.com/embed/rmq08QWOPjCLv9dgue/video"
-                width="800"
-                height="680"
+                width="400"
+                height="300"
                 frameBorder="0"
                 className="giphy-embed"
                 allowFullScreen
@@ -72,12 +73,12 @@ function Home() {
             </div>
             <h3>Get Stronger with Effective Exercises.</h3> <br />
           </section>
-          <div>
+          <div className="signsignup">
             {!user && (
               <span>
                 Do you need to <Link to="/signin">sign in</Link> or <Link to="/signup">sign up</Link>?
               </span>
-            )}{' '}
+            )}
           </div>
         </div>
         <ImageWrapper>
