@@ -75,6 +75,8 @@ A few of the frameworks/libraries that were used to build the project are:
 
 You can export individual workouts or create an export of all your workouts and import them later. You can also transfer them to another device.
 
+<a  align="right" href="#top">Back to top</a>
+
 <!-- GETTING STARTED -->
 
 ## Getting Started
