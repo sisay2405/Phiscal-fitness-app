@@ -2,9 +2,8 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import GlobalStyle from '../utils/globalStyle';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const Wrapper = styled.div`
   display: flex;
@@ -28,21 +27,19 @@ const Wrapper = styled.div`
       margin-bottom: 2rem;
     }
   }
-}
 `;
 
-const Layout = () => {
+function Layout() {
   return (
     <>
       <GlobalStyle />
       <Wrapper>
-        <Header />
         <Navbar />
         <Outlet />
         <Footer />
       </Wrapper>
     </>
   );
-};
+}
 
 export default Layout;
