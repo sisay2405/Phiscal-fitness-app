@@ -8,7 +8,6 @@ import useAuth from '../../utils/useAuths';
 import videoSources from '../../videoSource/videoSources';
 
 function ExerciseDetails({ exercise }: { exercise: Exercise }) {
-  // const [ExName, setExName] = useState<string>('')
   const setOrReps = [1, 3, 5, 7, 9];
   const { user } = useAuth();
   const makeNewExercise = useCallback(
@@ -60,11 +59,8 @@ function ExerciseDetails({ exercise }: { exercise: Exercise }) {
   useEffect(() => {
     if (isValidExercise(exercise)) {
       setExerciseData(exercise);
-      // setExName(Object.keys(videoSources))
-      console.log(exercise.type);
     } else if (!isValidExercise(exercise)) {
       setExerciseData(makeNewExercise());
-      // setExName(exercise.type)
     }
   }, [exercise, isValidExercise, makeNewExercise]);
 
@@ -176,7 +172,6 @@ function ExerciseDetails({ exercise }: { exercise: Exercise }) {
               type='datetime-local'
               onChange={event => {
                 const currentDateTime = new Date(event.target.value);
-                // console.table({ utc: currentDateTime.toUTCString(), iso: currentDateTime.toISOString() });
                 setExerciseField('startTime', currentDateTime.toISOString());
               }}
               sx={{ mb: '1.4rem' }}
@@ -232,7 +227,6 @@ function ExerciseDetails({ exercise }: { exercise: Exercise }) {
                   title='Exercise Videos- Sit Up'
                   frameBorder='0'
                   allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-                  // allowfullscreen
                 />
               )}
             </Box>

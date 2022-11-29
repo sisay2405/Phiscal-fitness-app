@@ -23,12 +23,10 @@ import {
   updateDoc,
   where
 } from 'firebase/firestore';
-// import { setExercises } from 'store/exercisesSlice';
 import store from '../app/redux/store';
 import { clearUser, setAuthError, setUser } from '../features/slices/userSlice';
 import { setExercises } from '../features/slices/exercisesSlice';
 
-// import store from 'app/redux/store';
 import { Exercise, User } from './type';
 
  type signInUser = {
@@ -81,6 +79,29 @@ export const signInWithGoogle = () => {
       console.log(error);
     });
 };
+export const signInWithGithub = () => {
+  signInWithPopup(auth, provider)
+    .then(async result => {
+      if (!result) return;
+      const plainUserEntries = Object.entries(result.user).filter(([, value]) => typeof value !== 'object');
+      const plainUser = Object.fromEntries(plainUserEntries);
+
+      localStorage.setItem('token', await result.user.getIdToken());
+      localStorage.setItem('user', JSON.stringify(plainUser));
+      if (result.user.email) {
+        const userObj = {
+          email: result.user.email,
+          uid: result.user.uid,
+          displayName: result.user.displayName,
+          photoURL: result.user.photoURL
+        } 
+        store.dispatch(setUser(userObj));
+      }   
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
 const dispatchError = (err: any) => {
   return store.dispatch(setAuthError(err));
 };
@@ -91,15 +112,12 @@ const updateUser = async (user: FirebaseUser) => {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()&&user.email) {
-      // if (result.user.email) {
         const userObj = {
           email:user.email,
           uid: user.uid,
           displayName: user.displayName,
           photoURL: user.photoURL
         } 
-      //   store.dispatch(setUser(userObj));
-      // } 
       return store.dispatch(setUser(userObj));
     }
   }
@@ -152,7 +170,6 @@ onAuthStateChanged(auth, async user => {
       } 
       store.dispatch(setUser(userObj));
     }
-    // store.dispatch(setUser(userObj));
   }
 });
 
