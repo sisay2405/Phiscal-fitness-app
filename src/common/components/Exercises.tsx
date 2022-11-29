@@ -4,11 +4,11 @@ import Button from '@mui/material/Button';
 import { Box, Stack } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from 'store';
-import ExerciseSummary from './ExerciseSummary';
+import { RootState } from 'app/redux';
+import ExerciseSummary from '../../features/components/ExerciseSummary';
 import ExerciseDetails from './ExerciseDetails';
-import { Exercise } from '../utils/type';
-import { exerciseStore } from '../utils/firebase';
+import { Exercise } from '../../utils/type';
+import { exerciseStore } from '../../utils/firebase';
 
 function Exercises() {
   const { exercises } = useSelector((state: RootState) => state);
@@ -24,8 +24,8 @@ function Exercises() {
     }
 
     return (
-      <Stack direction="column" gap={3} divider={<Divider orientation="horizontal" flexItem />}>
-        {exercises.map((exercise) => (
+      <Stack direction='column' gap={3} divider={<Divider orientation='horizontal' flexItem />}>
+        {exercises.map(exercise => (
           <Box key={exercise.id}>
             <ExerciseSummary onClick={() => setExercise(exercise)} exercise={exercise} />
           </Box>
@@ -50,12 +50,12 @@ function Exercises() {
 
   return (
     <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 4fr ', gap: '4' }}>
-      <ul>
+      <ul id='exercises-left-sidenav'>
         <h2>List of Exercises</h2>
         <Button
-          variant="text"
-          color="primary"
-          data-testid="custom-element"
+          variant='text'
+          color='primary'
+          data-testid='custom-element'
           startIcon={<AddCircleOutline />}
           onClick={() => {
             setExercise({} as any as Exercise);
@@ -65,6 +65,8 @@ function Exercises() {
         </Button>
         {showExercises(exercises)}
       </ul>
+
+      {/* page content - right content*/}
       {showExerciseDetails(exercise)}
     </Box>
   );

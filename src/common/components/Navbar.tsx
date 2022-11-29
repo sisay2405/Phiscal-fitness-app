@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { BiMenu } from 'react-icons/bi';
 import { ImCancelCircle } from 'react-icons/im';
-import Logo from '../assets/images/Logo.png';
-import NavLinks from './NavLinks';
+import Logo from '../../assets/images/Logo.png';
+import NavLinks from '../../features/components/NavLinks';
 
 const StyleHeaderWrapper = styled.header`
   overflow: hidden !important;
@@ -58,13 +58,13 @@ function Navbar() {
   return (
     <StyleHeaderWrapper>
       <nav>
-        <div className="logo">
-          <Link to="/">
+        <div className='logo'>
+          <Link to='/'>
             <span>
-              <img src={Logo} alt="Logo" />
+              <img src={Logo} alt='Logo' />
             </span>
           </Link>
-          <Link to="/">
+          <Link to='/'>
             <h1>Phisical Exercise</h1>
           </Link>
         </div>

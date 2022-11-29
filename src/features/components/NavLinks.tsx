@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import useAuth from 'utils/useAuths';
-import { signOut } from '../utils/firebase';
+import { signOut } from '../../utils/firebase';
 
 const Wrapper = styled.div`
   display: none !important;
@@ -101,10 +101,10 @@ function NavLinks() {
         {!user && (
           <>
             <li>
-              <NavLink to="/signIn">Sign In</NavLink>
+              <NavLink to='/signIn'>Sign In</NavLink>
             </li>
             <li>
-              <NavLink to="/signup">Sign Up</NavLink>
+              <NavLink to='/signup'>Sign Up</NavLink>
             </li>
           </>
         )}
@@ -112,30 +112,34 @@ function NavLinks() {
         {user && (
           <>
             <li>
-              <NavLink to="/">Home</NavLink>
+              <NavLink to='/'>Home</NavLink>
             </li>
             <li>
-              <NavLink to="/exercises">Exercises</NavLink>
+              <NavLink to='/exercises'>Exercises</NavLink>
+            </li>
+            <li>
+              <NavLink to='/charts'>Charts</NavLink>
             </li>
             <div>
-              <div className="profile">
-                <NavLink className="displayname" to="/profile">
+              <div className='profile'>
+                <NavLink className='displayname' to='/profile'>
                   {user.displayName}
                 </NavLink>
-                <div className="profilePhoto">
+                <div className='profilePhoto'>
                   <img
-                    className="profilePhoto"
+                    className='profilePhoto'
                     src={
-                      user?.photoURL || 'https://th.bing.com/th/id/R.e6717254470eaf137158f3be5c96c83e?rik=8m6MRRgeuqO5rQ&pid=ImgRaw&r=0" alt="" width="90px"'
+                      user?.photoURL ||
+                      'https://th.bing.com/th/id/R.e6717254470eaf137158f3be5c96c83e?rik=8m6MRRgeuqO5rQ&pid=ImgRaw&r=0" alt="" width="90px"'
                     }
-                    alt="#"
+                    alt='#'
                   />
                 </div>
               </div>
             </div>
             <li>
-              <div className="logoutbutton">
-                <button type="button" onClick={handleSignOuts}>
+              <div className='logoutbutton'>
+                <button type='button' onClick={handleSignOuts}>
                   Sign Out
                 </button>
               </div>

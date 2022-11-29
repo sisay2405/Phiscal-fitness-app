@@ -11,8 +11,8 @@ function useTimer() {
     if (!isRunning) {
       setIsRunning(
         setInterval(() => {
-          setElapsedTime((currentElapsedTime) => currentElapsedTime + defaultIntervalPeriod);
-        }, defaultIntervalPeriod * 1000),
+          setElapsedTime(currentElapsedTime => currentElapsedTime + defaultIntervalPeriod);
+        }, defaultIntervalPeriod * 1000)
       );
     } else if (isRunning) {
       clearInterval(isRunning);

@@ -1,13 +1,13 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { useAppDispatch } from '../utils/reduxHooks';
-import { signIn, signInWithGoogle } from '../utils/firebase';
-import { setAuthError } from '../store/userSlice';
-import useAuth from '../utils/useAuths';
-import useProfileRedirect from '../utils/useProfileRedirect';
-import Error from '../components/Error';
-import physcial_girl from '../assets/images/3P1et-.gif';
+import { useAppDispatch } from '../../utils/reduxHooks';
+import { signIn, signInWithGoogle } from '../../utils/firebase';
+import { setAuthError } from '../slices/userSlice';
+import useAuth from '../../utils/useAuths';
+import useProfileRedirect from '../../utils/useProfileRedirect';
+import Error from '../../common/components/Error';
+import physcial_girl from '../../assets/images/3P1et-.gif';
 
 const formDefaults = { email: '', password: '' };
 const Wrapper = styled.div`
@@ -130,39 +130,46 @@ function SignIn() {
         <h2>Sign In</h2>
         {authError && <Error message={authError} />}
         <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="email">
+          <div className='mb-3'>
+            <label htmlFor='email'>
               Email:
               <input
-                id="email"
-                type="email"
-                name="email"
-                className="form-control"
+                id='email'
+                type='email'
+                name='email'
+                className='form-control'
                 value={email}
-                placeholder="Enter email address.."
+                placeholder='Enter email address..'
                 onChange={handleInputChange}
               />
             </label>
           </div>
-          <label htmlFor="password">
+          <label htmlFor='password'>
             Password:
-            <input id="password" type="password" name="password" value={password} placeholder="S3cr3tPW!" onChange={handleInputChange} />
+            <input
+              id='password'
+              type='password'
+              name='password'
+              value={password}
+              placeholder='S3cr3tPW!'
+              onChange={handleInputChange}
+            />
           </label>
-          <button type="submit" data-testid="custom-element">
+          <button type='submit' data-testid='custom-element'>
             Submit
           </button>
           <div>
-            <button type="button" className="login-with-google-btn" onClick={handleGoogleSignIn}>
+            <button type='button' className='login-with-google-btn' onClick={handleGoogleSignIn}>
               Sign in with Google
             </button>
           </div>
         </form>
         <p>
-          Need to register? <Link to="/signup">Sign up</Link> instead!
+          Need to register? <Link to='/signup'>Sign up</Link> instead!
         </p>
       </main>
       <ImageWrapper>
-        <img src={physcial_girl} alt="physcial_girl" />
+        <img src={physcial_girl} alt='physcial_girl' />
       </ImageWrapper>
     </Wrapper>
   );

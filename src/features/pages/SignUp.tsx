@@ -1,11 +1,11 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import useAuth, { useAppDispatch } from '../utils/useAuths';
-import { signUp } from '../utils/firebase';
-import { setAuthError } from '../store/userSlice';
-import useProfileRedirect from '../utils/useProfileRedirect';
-import Error from '../components/Error';
+import useAuth, { useAppDispatch } from '../../utils/useAuths';
+import { signUp } from '../../utils/firebase';
+import { setAuthError } from '../slices/userSlice';
+import useProfileRedirect from '../../utils/useProfileRedirect';
+import Error from '../../common/components/Error';
 
 const SignupWrapper = styled.div`
   font-size: 0.8rem;
@@ -106,6 +106,8 @@ const formDefaults = {
   verifyPassword: '',
   isAdmin: false,
   displayName: '',
+  uid: '',
+  photoURL: ''
 };
 function SignUp() {
   const dispatch = useAppDispatch();
@@ -144,76 +146,108 @@ function SignUp() {
         <h2>Sign Up</h2>
         {authError && <Error message={authError} />}
         <form onSubmit={handleSubmit}>
-          <label htmlFor="firstName">
+          <label htmlFor='firstName'>
             First Name:
-            <input id="firstName" type="firstName" name="firstName" value={firstName} placeholder="First Name" required onChange={handleInputChange} />
-          </label>
-          <label htmlFor="lastName">
-            Last Name:
-            <input id="lastName" type="lastName" name="lastName" value={lastName} placeholder="Last Name" required onChange={handleInputChange} />
-          </label>
-          <label htmlFor="displayName">
-            Display Name:
             <input
-              id="DisplayName"
-              type="displayname"
-              name="displayName"
-              value={displayName}
-              placeholder="display Name"
+              id='firstName'
+              type='firstName'
+              name='firstName'
+              value={firstName}
+              placeholder='First Name'
               required
               onChange={handleInputChange}
             />
           </label>
-          <label htmlFor="email">
+          <label htmlFor='lastName'>
+            Last Name:
+            <input
+              id='lastName'
+              type='lastName'
+              name='lastName'
+              value={lastName}
+              placeholder='Last Name'
+              required
+              onChange={handleInputChange}
+            />
+          </label>
+          <label htmlFor='displayName'>
+            Display Name:
+            <input
+              id='DisplayName'
+              type='displayname'
+              name='displayName'
+              value={displayName}
+              placeholder='display Name'
+              required
+              onChange={handleInputChange}
+            />
+          </label>
+          <label htmlFor='email'>
             Email:
-            <input id="email" type="email" name="email" value={email} placeholder="sample@sample.com" required onChange={handleInputChange} />
+            <input
+              id='email'
+              type='email'
+              name='email'
+              value={email}
+              placeholder='sample@sample.com'
+              required
+              onChange={handleInputChange}
+            />
           </label>
-          <label htmlFor="password">
+          <label htmlFor='password'>
             Password:
-            <input id="password" type="password" name="password" value={password} placeholder="*********" required onChange={handleInputChange} />
+            <input
+              id='password'
+              type='password'
+              name='password'
+              value={password}
+              placeholder='*********'
+              required
+              onChange={handleInputChange}
+            />
           </label>
-          <label htmlFor="verifyPassword">
+          <label htmlFor='verifyPassword'>
             Confirm Password:
             <input
-              id="verifyPassword"
-              type="password"
-              name="verifyPassword"
+              id='verifyPassword'
+              type='password'
+              name='verifyPassword'
               value={verifyPassword}
-              placeholder="**********"
+              placeholder='**********'
               required
               onChange={handleInputChange}
             />
           </label>
           <p>
             By creating an account you agree to our{' '}
-            <a href="#top" style={{ color: 'dodgerblue' }}>
+            <a href='#top' style={{ color: 'dodgerblue' }}>
               Terms & Privacy
             </a>
           </p>
-          <div className="clearfix">
-            <button className="register_button" type="submit" data-testid="custom-element" disabled={!formData}>
+          <div className='clearfix'>
+            <button className='register_button' type='submit' data-testid='custom-element' disabled={!formData}>
               <span>REGISTER</span>
             </button>
-            <button type="button" className="cancelbtn">
+            <button type='button' className='cancelbtn'>
               CANCEL
             </button>
           </div>
         </form>
         <p>
-          Already registered? <Link to="/signin">Sign in</Link> instead!
+          Already registered? <Link to='/signin'>Sign in</Link> instead!
         </p>
       </main>
       <section>
         <h2>Get Stronger with Effective Exercises.</h2>
-        <div className="image">
+        <div className='image'>
           <iframe
-            src="https://giphy.com/embed/FaYaqb69AKg0g"
-            width="400"
+            src='https://giphy.com/embed/FaYaqb69AKg0g'
+            width='400'
             // height="280"
-            frameBorder="0"
-            className="giphy-embed"
+            frameBorder='0'
+            className='giphy-embed'
             allowFullScreen
-            title="This is a unique title"
+            title='This is a unique title'
           />
         </div>
         {/* <iframe src="https://giphy.com/embed/FaYaqb69AKg0g" width="480" height="320" frameBorder="0" className="giphy-embed" allowFullScreen />

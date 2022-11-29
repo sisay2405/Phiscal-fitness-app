@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Exercise } from '../utils/type';
+import { Exercise } from '../../utils/type';
 
 const initialState: Exercise[] = [];
 
@@ -10,8 +10,8 @@ export const exerciseSlice = createSlice({
     setExercises(state, { payload }) {
       state = payload;
       return state;
-    },
-  },
+    }
+  }
 });
 
 export const { setExercises } = exerciseSlice.actions;

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import useAuth from '../utils/useAuths';
-import Hero from '../assets/images/by-unscreen.gif';
+import useAuth from '../../utils/useAuths';
+import Hero from '../../assets/images/by-unscreen.gif';
 
 const Wrapper = styled.div`
   overflow: hidden;
@@ -54,35 +54,35 @@ function Home() {
         <div>
           <p>Work hard to become strong</p>
           <span>
-            since what we do with our bodies also affects what we can do with our minds, fitness influences to some degree qualities such as mental alertness
-            and emotional stability.
+            since what we do with our bodies also affects what we can do with our minds, fitness influences to some
+            degree qualities such as mental alertness and emotional stability.
           </span>{' '}
           <br />
           <hr />
           <section>
-            <div className="image">
+            <div className='image'>
               <iframe
-                src="https://giphy.com/embed/MkXP4OH6eO2nm"
-                width="400"
-                height="300"
-                frameBorder="0"
-                className="giphy-embed"
+                src='https://giphy.com/embed/MkXP4OH6eO2nm'
+                width='400'
+                height='300'
+                frameBorder='0'
+                className='giphy-embed'
                 allowFullScreen
-                title="This is a unique title"
+                title='This is a unique title'
               />
             </div>
             <h3>Get Stronger with Effective Exercises.</h3> <br />
           </section>
-          <div className="signsignup">
+          <div className='signsignup'>
             {!user && (
               <span>
-                Do you need to <Link to="/signin">sign in</Link> or <Link to="/signup">sign up</Link>?
+                Do you need to <Link to='/signin'>sign in</Link> or <Link to='/signup'>sign up</Link>?
               </span>
             )}
           </div>
         </div>
         <ImageWrapper>
-          <img src={Hero} alt="" />
+          <img src={Hero} alt='' />
         </ImageWrapper>
       </Wrapper>
     </main>
