@@ -1,9 +1,9 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
-import GlobalStyle from '../utils/globalStyle';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import GlobalStyle from '../../utils/globalStyle';
+import Navbar from '../../common/components/Navbar';
+import Footer from '../../common/components/Footer';
 
 const Wrapper = styled.div`
   display: flex;

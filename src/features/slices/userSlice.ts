@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { User } from 'firebase/auth';
+import { User }  from '../../utils/type';
 
 const initialState = {
   value: {},
   user: null as User | null,
-  authError: null as null | string,
+  authError: null as null | string
 };
 
 export const userSlice = createSlice({
@@ -22,8 +22,8 @@ export const userSlice = createSlice({
 
     setAuthError(state, { payload }: { payload: string }) {
       state.authError = payload;
-    },
-  },
+    }
+  }
 });
 
 export const { setUser, clearUser, setAuthError } = userSlice.actions;

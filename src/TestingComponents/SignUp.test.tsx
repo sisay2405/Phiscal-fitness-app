@@ -2,8 +2,8 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import SignUp from 'pages/SignUp';
-import store from '../store';
+import SignUp from 'features/pages/SignUp';
+import store from '../app/redux/store';
 
 test('render "Sign Up" as a text', () => {
   render(
@@ -11,7 +11,7 @@ test('render "Sign Up" as a text', () => {
       <BrowserRouter>
         <SignUp />
       </BrowserRouter>
-    </Provider>,
+    </Provider>
   );
   const viewSignUpElement = screen.getByText('Sign Up');
   expect(viewSignUpElement).toBeInTheDocument();
@@ -22,7 +22,7 @@ test('should the button have attribute submit', () => {
       <BrowserRouter>
         <SignUp />
       </BrowserRouter>
-    </Provider>,
+    </Provider>
   );
   const buttonElement = screen.getByTestId('custom-element');
   expect(buttonElement).toBeInTheDocument();
@@ -34,7 +34,7 @@ test('display Name', () => {
       <BrowserRouter>
         <SignUp />
       </BrowserRouter>
-    </Provider>,
+    </Provider>
   );
   const placeHolder = screen.getByPlaceholderText(/display Name/i);
   expect(placeHolder).toBeInTheDocument();
