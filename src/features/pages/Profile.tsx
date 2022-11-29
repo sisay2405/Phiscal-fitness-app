@@ -1,8 +1,8 @@
 import { Stack } from '@mui/material';
-import Error from 'components/Error';
+import Error from 'common/components/Error';
 import React from 'react';
 import styled from 'styled-components';
-import useAuth from '../utils/useAuths';
+import useAuth from '../../utils/useAuths';
 
 const ProfileWrapper = styled.footer`
   margin-top: 100px;
@@ -41,16 +41,19 @@ function Profile(): React.ReactElement {
   const { email, displayName, photoURL } = user;
 
   return (
-    <main className="profilemain">
+    <main className='profilemain'>
       <ProfileWrapper>
-        <Stack direction="column">
+        <Stack direction='column'>
           {displayName !== null ? (
             <>
-              <div className="profilePhoto">
+              <div className='profilePhoto'>
                 <img
-                  className="profilePhoto"
-                  src={photoURL || 'https://th.bing.com/th/id/R.e6717254470eaf137158f3be5c96c83e?rik=8m6MRRgeuqO5rQ&pid=ImgRaw&r=0" alt="" width="90px"'}
-                  alt="#"
+                  className='profilePhoto'
+                  src={
+                    photoURL ||
+                    'https://th.bing.com/th/id/R.e6717254470eaf137158f3be5c96c83e?rik=8m6MRRgeuqO5rQ&pid=ImgRaw&r=0" alt="" width="90px"'
+                  }
+                  alt='#'
                 />
               </div>
               <div>

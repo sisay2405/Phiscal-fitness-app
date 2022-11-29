@@ -2,8 +2,8 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import SignIn from 'pages/SignIn';
-import store from '../store';
+import SignIn from 'features/pages/SignIn';
+import store from '../app/redux/store';
 
 test('renders "Sign In" as a text', () => {
   render(
@@ -11,7 +11,7 @@ test('renders "Sign In" as a text', () => {
       <BrowserRouter>
         <SignIn />
       </BrowserRouter>
-    </Provider>,
+    </Provider>
   );
   const searchElement = screen.getByText('Sign In');
   expect(searchElement).toBeInTheDocument();
@@ -22,7 +22,7 @@ test('should the button have attribute submit', () => {
       <BrowserRouter>
         <SignIn />
       </BrowserRouter>
-    </Provider>,
+    </Provider>
   );
   const buttonElement = screen.getByTestId('custom-element');
   expect(buttonElement).toBeInTheDocument();
@@ -34,7 +34,7 @@ test('should the input has a place holder Enter email address..', () => {
       <BrowserRouter>
         <SignIn />
       </BrowserRouter>
-    </Provider>,
+    </Provider>
   );
   const placeHolder = screen.getByPlaceholderText(/Enter email address../i);
   expect(placeHolder).toBeInTheDocument();
@@ -46,7 +46,7 @@ test('should render a button', () => {
       <BrowserRouter>
         <SignIn />
       </BrowserRouter>
-    </Provider>,
+    </Provider>
   );
   const buttonElement = screen.getByRole('button', { name: /Submit/i });
   expect(buttonElement).toBeInTheDocument();

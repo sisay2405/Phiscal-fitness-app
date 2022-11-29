@@ -2,8 +2,8 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import Exercises from 'pages/Exercises';
-import store from '../store';
+import Exercises from '../common/components/Exercises';
+import store from '../app/redux/store';
 
 test('renders "List of Exercises" as a text', () => {
   render(
@@ -11,7 +11,7 @@ test('renders "List of Exercises" as a text', () => {
       <BrowserRouter>
         <Exercises />
       </BrowserRouter>
-    </Provider>,
+    </Provider>
   );
   const searchElement = screen.getByText('List of Exercises');
   expect(searchElement).toBeInTheDocument();
@@ -22,7 +22,7 @@ test('should the button have attribute submit', () => {
       <BrowserRouter>
         <Exercises />
       </BrowserRouter>
-    </Provider>,
+    </Provider>
   );
   const buttonElement = screen.getByTestId('exercises-list');
   expect(buttonElement).toBeInTheDocument();

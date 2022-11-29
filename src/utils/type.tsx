@@ -4,16 +4,23 @@ export interface Rep {
   startTime: string;
   endTime: string;
 }
-
+export type User = {
+  email: string;
+  uid: string;
+  displayName: string | null;
+  photoURL: string | null;
+};
 export type TimeUnit = 'seconds' | 'minutes';
+export type videoSources = string;
 
 export interface Exercise {
   id?: string | null;
   type: string;
-  user_id: string;
+  userId: string;
   startTime: string;
   endTime: string;
   reps: Rep[];
+  calories: number;
   duration: {
     value: number;
     timeUnit: TimeUnit | null;
