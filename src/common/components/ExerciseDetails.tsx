@@ -1,11 +1,18 @@
 import { AddCircleOutlineRounded } from '@mui/icons-material';
 import { Autocomplete, Box, Button, FormControl, IconButton, Stack, TextField } from '@mui/material';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { ChangeEvent, SyntheticEvent, useCallback, useEffect, useState } from 'react';
 import useTimer from '../../features/components/useTimer';
 import { exerciseStore } from '../../utils/firebase';
-import { Exercise } from '../../utils/type';
+import { Exercise, Rep } from '../../utils/type';
 import useAuth from '../../utils/useAuths';
 import videoSources from '../../videoSource/videoSources';
+import dayjs, { Dayjs } from 'dayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { string } from 'prop-types';
+import { getValue } from '@testing-library/user-event/dist/utils';
 
 function ExerciseDetails({ exercise }: { exercise: Exercise }) {
   const setOrReps = [1, 3, 5, 7, 9];
@@ -54,6 +61,7 @@ function ExerciseDetails({ exercise }: { exercise: Exercise }) {
     isValidExercise(exercise) ? exercise : makeNewExercise(user?.uid),
   );
   const [dateTimeField, setDateTimeField] = useState(new Date(exercise?.startTime ?? Date.now()));
+
   const timer = useTimer();
 
   useEffect(() => {
@@ -64,10 +72,10 @@ function ExerciseDetails({ exercise }: { exercise: Exercise }) {
     }
   }, [exercise, isValidExercise, makeNewExercise]);
 
-  const setExerciseField = (key: keyof Exercise, value: any) => {
+  const setExerciseField = <key extends keyof Exercise>(key: key, value: Exercise[key]) => {
     setExerciseData({ ...exerciseData, [key]: value });
     if (key === 'startTime') {
-      setDateTimeField(new Date(value));
+      setDateTimeField(new Date(value as string));
     }
   };
 
@@ -92,7 +100,13 @@ function ExerciseDetails({ exercise }: { exercise: Exercise }) {
         <Box>Please select Exercise </Box>
       </Box>
     );
+  const exerciseInput = (_date: Date | null, keyboardInputValue?: string) => {
 
+if (_date){
+const dateString = _date.toDateString()
+  setExerciseField('startTime', dateString)
+}
+  };
   return (
     <Box sx={{ padding: 10, 'background-color': '#e8fffa;', overflow: 'hidden' }}>
       <form className='flex-column padding ' onSubmit={makeSubmitHandler}>
@@ -167,23 +181,22 @@ function ExerciseDetails({ exercise }: { exercise: Exercise }) {
                 />
               )}
             />
-            <TextField
-              id='startTime'
-              type='datetime-local'
-              onChange={event => {
-                const currentDateTime = new Date(event.target.value);
-                setExerciseField('startTime', currentDateTime.toISOString());
-              }}
-              sx={{ mb: '1.4rem' }}
-              value={dateTimeField}
-            />
+
+           <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DateTimePicker
+                label='Date&Time picker'
+                value={dayjs(exerciseData.startTime)}
+                onChange={exerciseInput}
+                renderInput={(params: {}) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
 
             <TextField
               id='calories'
               label='Calories per rep'
               value={exerciseData?.calories ?? -1}
               type='number'
-              onChange={e => setExerciseField('calories', e.target.value)}
+              onChange={e => setExerciseField('calories', Number(e.target.value))}
             />
             <IconButton
               aria-label='add a rep to workout'
@@ -191,7 +204,7 @@ function ExerciseDetails({ exercise }: { exercise: Exercise }) {
                 setExerciseField('reps', [
                   ...(exerciseData.reps || []),
                   { number: reps, startTime: exerciseData.startTime },
-                ])
+                ] as Rep[])
               }
             >
               <AddCircleOutlineRounded />

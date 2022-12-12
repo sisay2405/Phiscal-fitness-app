@@ -1,6 +1,5 @@
 import { Box, Stack } from '@mui/system';
 import { Exercise } from '../../utils/type';
-
 import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js';
 import { ReactNode, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
@@ -23,24 +22,40 @@ export const options = {
     },
     title: {
       display: true,
-      text: 'Chart.js Bar Chart',
+      text: 'Calories Chart',
     },
   },
 };
-
+// const options = {
+//   scales: {
+//     xAxes: [
+//       {
+//         type: 'time',
+//         time: {
+//           unit: 'month',
+//           displayFormats: {
+//             month: 'MMM YYYY',
+//           },
+//         },
+//       },
+//     ],
+//   },
+// };
 // const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
 function CaloriesChart() {
   const { exercises } = useSelector((state: RootState) => state);
   const [type, setType] = useState<'per exercise' | 'per rep' | string>('per exercise');
   const labels: string[] = exercises
-    .map(ex =>
-      type === 'per exercise'
-        ? `${ex.startTime}__${type}`
+    .map(ex => {
+      const [dateValue, timeValue] = new Date(ex.startTime).toLocaleString().split(' ');
+
+      return type === 'per exercise'
+        ? `${dateValue}`
         : ex.reps.map((rep, i) => {
-            return `${ex.startTime}__${type}_${i + 1}`;
-          }),
-    )
+            return `${dateValue} `;
+          });
+    })
     .flatMap(val => val);
 
   const values: number[] = exercises
@@ -59,7 +74,8 @@ function CaloriesChart() {
       {
         label: 'Dataset 1',
         data: values,
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        backgroundColor: 'rgba(250, 99, 132, 0.5)',
+        borderColor: 'rgba(255, 99, 132, 1)',
       },
     ],
   };

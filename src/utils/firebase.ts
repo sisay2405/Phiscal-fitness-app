@@ -5,10 +5,13 @@ import {
   getAuth,
   signInWithPopup,
   GoogleAuthProvider,
+  GithubAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut as signOutUser,
-  User as FirebaseUser
+  User as FirebaseUser,
+  FacebookAuthProvider,
+  UserCredential,
 } from 'firebase/auth';
 import {
   addDoc,
@@ -21,7 +24,7 @@ import {
   query,
   setDoc,
   updateDoc,
-  where
+  where,
 } from 'firebase/firestore';
 import store from '../app/redux/store';
 import { clearUser, setAuthError, setUser } from '../features/slices/userSlice';
@@ -29,7 +32,7 @@ import { setExercises } from '../features/slices/exercisesSlice';
 
 import { Exercise, User } from './type';
 
- type signInUser = {
+type signInUser = {
   email: string;
   password: string;
 };
@@ -50,54 +53,56 @@ const firebaseConfig = {
   projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
   storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
-export const signInWithGoogle = () => {
-  signInWithPopup(auth, provider)
-    .then(async result => {
-      if (!result) return;
-      const plainUserEntries = Object.entries(result.user).filter(([, value]) => typeof value !== 'object');
-      const plainUser = Object.fromEntries(plainUserEntries);
+const googleAuthProvider = new GoogleAuthProvider();
+const providergithub = new GithubAuthProvider();
+const providerFacebook = new FacebookAuthProvider();
 
-      localStorage.setItem('token', await result.user.getIdToken());
-      localStorage.setItem('user', JSON.stringify(plainUser));
-      if (result.user.email) {
-        const userObj = {
-          email: result.user.email,
-          uid: result.user.uid,
-          displayName: result.user.displayName,
-          photoURL: result.user.photoURL
-        } 
-        store.dispatch(setUser(userObj));
-      }   
-    })
+const buildUserStoreObject = (result: UserCredential) => {
+  return {
+    email: result.user?.email ?? '',
+    uid: result.user.uid,
+    displayName: result.user?.displayName ?? '',
+    photoURL: result.user?.photoURL ?? '',
+  };
+};
+
+const writeUserInfoToStore = (token: string, plainUser: string) => {
+  localStorage.setItem('token', token);
+  localStorage.setItem('user', plainUser);
+};
+
+const onSigninResult =
+  (authProviderName: 'google' | 'facebook' | 'github') =>
+  async (result: UserCredential): Promise<void> => {
+    if (!result) return;
+    const plainUserEntries = Object.entries(result.user).filter(([, value]) => typeof value !== 'object');
+    const plainUser = Object.fromEntries(plainUserEntries);
+    writeUserInfoToStore(await result.user.getIdToken(), JSON.stringify({ ...plainUser, authProviderName }));
+    store.dispatch(setUser(buildUserStoreObject(result)));
+  };
+export const signInWithGoogle = () => {
+  signInWithPopup(auth, googleAuthProvider)
+    .then(onSigninResult('google'))
     .catch(error => {
       console.log(error);
     });
 };
 export const signInWithGithub = () => {
-  signInWithPopup(auth, provider)
-    .then(async result => {
-      if (!result) return;
-      const plainUserEntries = Object.entries(result.user).filter(([, value]) => typeof value !== 'object');
-      const plainUser = Object.fromEntries(plainUserEntries);
+  signInWithPopup(auth, providergithub)
+    .then(onSigninResult('github'))
+    .catch(error => {
+      console.log(error);
+    });
+};
 
-      localStorage.setItem('token', await result.user.getIdToken());
-      localStorage.setItem('user', JSON.stringify(plainUser));
-      if (result.user.email) {
-        const userObj = {
-          email: result.user.email,
-          uid: result.user.uid,
-          displayName: result.user.displayName,
-          photoURL: result.user.photoURL
-        } 
-        store.dispatch(setUser(userObj));
-      }   
-    })
+export const signInWithFacebook = () => {
+  signInWithPopup(auth, providerFacebook)
+    .then(onSigninResult('facebook'))
     .catch(error => {
       console.log(error);
     });
@@ -110,14 +115,13 @@ const updateUser = async (user: FirebaseUser) => {
   if (user) {
     const docRef = doc(db, 'users', user.email as string);
     const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()&&user.email) {
-        const userObj = {
-          email:user.email,
-          uid: user.uid,
-          displayName: user.displayName,
-          photoURL: user.photoURL
-        } 
+    if (docSnap.exists() && user.email) {
+      const userObj = {
+        email: user.email,
+        uid: user.uid,
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+      };
       return store.dispatch(setUser(userObj));
     }
   }
@@ -133,7 +137,7 @@ const signUp = async ({ firstName, lastName, email, password, isAdmin = false, d
       firstName,
       lastName,
       email,
-      isAdmin
+      isAdmin,
     });
   } catch ({ message }) {
     dispatchError(message);
@@ -163,11 +167,11 @@ onAuthStateChanged(auth, async user => {
     await updateUser(user);
     if (user.email) {
       const userObj = {
-        email:user.email,
+        email: user.email,
         uid: user.uid,
         displayName: user.displayName,
-        photoURL: user.photoURL
-      } 
+        photoURL: user.photoURL,
+      };
       store.dispatch(setUser(userObj));
     }
   }
@@ -180,13 +184,12 @@ export const exerciseStore = () => {
 
     return getDocs(userExercises).then(({ docs }) => {
       const exercises = docs.map(doc => ({ ...doc.data(), id: doc.id }));
-      console.log({userExercises:exercises})
       return store.dispatch(setExercises(exercises));
     });
   };
   const createOrUpdate = ({ id = '', ...exercise }: Exercise) => {
     if (!id?.length) {
-      console.log({createOrUpdate:true, exercise})
+      console.log({ createOrUpdate: true, exercise });
       return addDoc(collection(db, 'exercises'), exercise).then(() => fetch());
     }
     const exerciseDoc = doc(db, 'exercises', id);

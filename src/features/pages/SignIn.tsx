@@ -2,7 +2,7 @@ import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAppDispatch } from '../../utils/reduxHooks';
-import { signIn, signInWithGithub, signInWithGoogle } from '../../utils/firebase';
+import { signIn, signInWithFacebook, signInWithGithub, signInWithGoogle } from '../../utils/firebase';
 import { setAuthError } from '../slices/userSlice';
 import useAuth from '../../utils/useAuths';
 import useProfileRedirect from '../../utils/useProfileRedirect';
@@ -128,6 +128,13 @@ function SignIn() {
       console.log(error);
     }
   };
+  const handleFacebookSignIn = async () => {
+    try {
+      signInWithFacebook();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <Wrapper>
       <main>
@@ -162,15 +169,9 @@ function SignIn() {
           <button type='submit' data-testid='custom-element'>
             Submit
           </button>
-          <div>
-            <button type='button' className='login-with-google-btn' onClick={handleGoogleSignIn}>
-              Sign in with Google
-            </button>
-          </div>
-          <div>
-            <button type='button' className='login-with-github-btn' onClick={handleGithubSignIn}>
-              Sign in with Github
-            </button>
+          <div className="center">
+            <div className="line" />
+            <div className="or">OR</div>
           </div>
         </form>
         <div className="wrapper">
@@ -179,7 +180,7 @@ function SignIn() {
               <img src={Google} alt="" className="icon" />
               Google
             </div>
-            <div className="loginButton facebook" onClick={handleGithubSignIn}>
+            <div className="loginButton facebook" onClick={handleFacebookSignIn}>
               <img src={Facebook} alt="" className="icon" />
               Facebook
             </div>
@@ -187,15 +188,6 @@ function SignIn() {
               <img src={Github} alt="" className="icon" />
               Github
             </div>
-          </div>
-          <div className="center">
-            <div className="line" />
-            <div className="or">OR</div>
-          </div>
-          <div className="right">
-            <input type="text" placeholder="Username" />
-            <input type="text" placeholder="Password" />
-            <button className="submit">Login</button>
           </div>
         </div>
         <p>
